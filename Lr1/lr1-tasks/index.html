@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Egor Chernov">
+        <link rel="canonical" href="https://egorchernov5.github.io/Lr1/lr1-tasks/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Lab 1 - Project documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Project documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Labs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Lab 1</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../.." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#task-1" class="nav-link">Task 1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-2" class="nav-link">Task 2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-3" class="nav-link">Task 3</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-4" class="nav-link">Task 4</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-5" class="nav-link">Task 5</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="task-1">Task 1</h2>
+<ul>
+<li><code>ServerSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+
+sock = socket.socket()
+
+# if &quot;127.0.0.1&quot; - connect only my cp host, if &quot;0.0.0.0&quot;- connect all hosts
+# 8080 - port
+sock.bind((&quot;&quot;, 8080))
+# set listening and queue size
+sock.listen(1)
+# accept() return client socket and client address
+# Адрес — массив, состоящий из IP-адреса и порта
+conn, addr = sock.accept()
+# get data
+data = conn.recv(16384)
+decodeData = data.decode(&quot;utf-8&quot;)
+print(&quot;Server: &quot; + decodeData)
+# two ways for send data, in both ways data should be encoded
+massage = &quot;Hello, client&quot;
+# conn.send(b&quot;Hello, client\n&quot;)
+conn.send(massage.encode(&quot;utf-8&quot;))
+# close connection
+conn.close()
+</code></pre>
+<ul>
+<li><code>ClientSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+
+sock = socket.socket()
+
+# connect to port which is listening server
+sock.connect((&quot;127.0.0.1&quot;, 8080))
+massage = &quot;Hello, server&quot;
+sock.send(massage.encode(&quot;utf-8&quot;))
+data = sock.recv(16384)
+decodeData = data.decode(&quot;utf-8&quot;)
+print(&quot;Client: &quot; + decodeData)
+</code></pre>
+<h2 id="task-2">Task 2</h2>
+<ul>
+<li><code>ServerSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+import math
+
+
+def math_square(m_data):
+    split_str = m_data.split()
+    if split_str[0] == &quot;a&quot;:
+        return int(split_str[1]) * int(split_str[2])
+    elif split_str[0] == &quot;b&quot;:
+        return int(split_str[1]) * int(split_str[2]) * math.sin(math.radians(int(split_str[3])))
+    elif split_str[0] == &quot;c&quot;:
+        return (1 / 2) * int(split_str[1]) * int(split_str[2]) * math.sin(math.radians(int(split_str[3])))
+    else:
+        return 0
+
+
+sock = socket.socket()
+sock.bind((&quot;&quot;, 8080))
+sock.listen(1)
+conn, addr = sock.accept()
+try:
+    while 1:
+        try:
+            conn.settimeout(10)
+            data = conn.recv(16384)
+            if not data:
+                break
+            decoded_data = data.decode(&quot;utf-8&quot;)
+            massage_out = str(math_square(decoded_data))
+            conn.send(massage_out.encode(&quot;utf-8&quot;))
+        except socket.error:
+            print(&quot;connection timed out&quot;)
+            break
+        finally:
+            conn.close()
+finally:
+    sock.close()
+</code></pre>
+<ul>
+<li><code>ClientSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+
+sock = socket.socket()
+sock.connect((&quot;127.0.0.1&quot;, 8080))
+massage = input(&quot;Which formula do you prefer?\na. S = a*h\nb. S = a*b*sin(a^b)\n&quot;
+                &quot;c. S = 0.5*d1*d2+sin(d1^d2)\nInput latter and params: &quot;)
+sock.send(massage.encode(&quot;utf-8&quot;))
+sock.settimeout(1)
+data = sock.recv(16384)
+decodeData = data.decode(&quot;utf-8&quot;)
+print(&quot;Answer: &quot; + decodeData)
+</code></pre>
+<h2 id="task-3">Task 3</h2>
+<ul>
+<li><code>ServerSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+import os
+
+
+with socket.socket() as s:
+    s.bind(('', 8080))
+    s.listen(1)
+    conn, addr = s.accept()
+    with conn:
+        work_path = os.getcwd()
+        res_path = ('\\'.join(work_path.split('\\')[:-1]) + '\\res\\index.html').replace('\\', '/')
+        with open(res_path) as fin:
+            message = fin.read()
+        print(conn.recv(16348).decode('utf-8'))
+        response = 'HTTP/1.0 200 OK\n\n' + message
+        conn.sendall(response.encode('utf-8'))
+</code></pre>
+<ul>
+<li><code>ClientSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+
+
+with socket.socket() as s:
+    s.connect(('127.0.0.1', 8080))
+    s.settimeout(5)
+    s.send(b&quot;GET / HTTP/1.1\n&quot;)
+    data = s.recv(16384)
+    decodeData = data.decode('utf-8')
+    print(decodeData)
+</code></pre>
+<ul>
+<li><code>index.html</code></li>
+</ul>
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My first title&lt;/h1&gt;
+    &lt;p&gt;My first article&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="task-4">Task 4</h2>
+<ul>
+<li><code>ServerSide.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+import threading
+
+
+def accept():
+    while 1:
+        try:
+            conn, addr = s.accept()
+            print(f&quot;New user {conn.getpeername()[1]} was added&quot;)
+            conn.send(b&quot;...Write \&quot;/exit\&quot; for live this chat...\n&quot;)
+            message = f&quot;...New member: {addr[1]}...\n&quot;
+            for user in users:
+                user.send(message.encode('utf-8'))
+            users.append(conn)
+            # Start a thread which receives messages
+            t_in = threading.Thread(target=in_data, name='in', args=(conn,))
+            t_in.start()
+        except socket.error:
+            break
+
+
+def in_data(t_conn):
+    t_user = t_conn.getpeername()[1]
+    while 1:
+        try:
+            data = t_conn.recv(1024)
+            decode_data = data.decode('utf-8')
+            # Start a thread which sends messages
+            t_out = threading.Thread(target=out_data, name='out', args=(t_conn, decode_data, ), daemon=True)
+            t_out.start()
+            t_out.join()
+        except socket.error:
+            print(f&quot;User {t_user} left&quot;)
+            break
+
+
+def out_data(t_conn, message):
+    t_user = t_conn.getpeername()[1]
+    if message == '/exit':
+        users.remove(t_conn)
+        specific_message = f&quot;...User {t_user} left...\n&quot;.encode('utf-8')
+        t_conn.close()
+    else:
+        specific_message = f&quot;User {t_user}: {message}&quot;.encode('utf-8')
+    for user in users:
+        if user == t_conn:
+            continue
+        user.send(specific_message)
+
+
+if __name__ == &quot;__main__&quot;:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        host = ''
+        port = 8080
+        s.bind((host, port))
+        s.listen(5)
+        users = []
+        print('Chat\'s started')
+        # Start a thread which accepts sockets
+        t_accept = threading.Thread(target=accept, name='accept', daemon=True)
+        t_accept.start()
+        while 1:
+            # Checking server shutdown
+            check = input('Write \&quot;/terminate\&quot; to stop this chat\n')
+            if check == '/terminate':
+                s.close()
+                print('Chat\' stopped')
+                break
+</code></pre>
+<ul>
+<li><code>User1.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+import threading
+import time
+
+
+def out_data():
+    time.sleep(2)
+    m = 'Hi, i\'m 0\n'
+    s.send(m.encode('utf-8'))
+    print(f'You ({s.getsockname()[1]}): {m}')
+    time.sleep(5)
+    m = 'What?\n'
+    s.send(m.encode('utf-8'))
+    print(f'You ({s.getsockname()[1]}): {m}')
+    time.sleep(4)
+    m = 'No, it\'s you!\n'
+    s.send(m.encode('utf-8'))
+    print(f'You ({s.getsockname()[1]}): No, {m}')
+    time.sleep(5)
+    s.send(b'/exit')
+
+
+if __name__ == &quot;__main__&quot;:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        host = '127.0.0.1'
+        port = 8080
+        s.connect((host, port))
+        t = threading.Thread(target=out_data, name='out', daemon=True)
+        i = 1
+        while 1:
+            try:
+                in_data = s.recv(1024)
+                decodeData = in_data.decode(&quot;utf-8&quot;)
+                if not in_data:
+                    print('You left the chat')
+                    break
+                print(decodeData)
+                if i:
+                    print('You have joined the chat')
+                    t.start()
+                    i -= 1
+            except socket.error:
+                print('Server was terminated')
+                break
+</code></pre>
+<ul>
+<li><code>User2.py</code></li>
+</ul>
+<pre><code class="language-python">import socket
+import threading
+import time
+
+
+def out_data():
+    time.sleep(2)
+    m = 'Hiii, i\'m 1\n'
+    s.send(m.encode('utf-8'))
+    print(f'You ({s.getsockname()[1]}): {m}')
+    m = 'Sgsvd...\n'
+    s.send(m.encode('utf-8'))
+    print(f'You ({s.getsockname()[1]}): {m}')
+    time.sleep(4)
+    m = 'You loser?\n'
+    s.send(m.encode('utf-8'))
+    print(f'You ({s.getsockname()[1]}): {m}')
+    time.sleep(5)
+    s.send(b'/exit')
+
+
+if __name__ == &quot;__main__&quot;:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        host = '127.0.0.1'
+        port = 8080
+        s.connect((host, port))
+        t = threading.Thread(target=out_data, name='out', daemon=True)
+        i = 1
+        while 1:
+            try:
+                in_data = s.recv(1024)
+                decodeData = in_data.decode(&quot;utf-8&quot;)
+                if not in_data:
+                    print('You left the chat')
+                    break
+                print(decodeData)
+                if i:
+                    print('You have joined the chat')
+                    t.start()
+                    i -= 1
+            except socket.error:
+                print('Server was terminated')
+                break
+</code></pre>
+<h2 id="task-5">Task 5</h2>
+<ul>
+<li><code>MyHTTPServer.py</code></li>
+</ul>
+<pre><code class="language-python">import os
+import socket
+from email.parser import Parser
+from HTTPError import HTTPError
+from Response import Response
+from Request import Request
+
+
+MAX_HEADERS = 100
+
+
+class MyHTTPServer:
+    def __init__(self, host, port):
+        self._host = host
+        self._port = port
+        self._subjects = {}
+
+    def serve_forever(self):
+        serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            serv_sock.bind((self._host, self._port))
+            serv_sock.listen(1)
+            while True:
+                conn, _ = serv_sock.accept()
+                try:
+                    self.serve_client(conn)
+                except Exception as e:
+                    print('Client serving failed', e)
+        finally:
+            serv_sock.close()
+
+    def serve_client(self, conn):
+        try:
+            # Parse request and return Request(method, target, ver, headers, rfile)
+            req = self.parse_request(conn)
+            # Return Response(200, 'OK', headers, body)
+            resp = self.handle_request(req)
+            self.send_response(conn, resp)
+        except Exception as e:
+            self.send_error(conn, e)
+
+        if conn:
+            req.rfile.close()
+            conn.close()
+
+    def parse_request(self, conn):
+        rfile = conn.makefile('rb')
+        method, target, ver = self.parse_request_line(rfile)
+        headers = self.parse_headers(rfile)
+        return Request(method, target, ver, headers, rfile)
+
+    def parse_request_line(self, rfile):
+        raw = rfile.readline()
+        req_line = str(raw, 'utf-8')
+        words = req_line.split()
+        if len(words) != 3:
+            raise HTTPError(400, 'Bad request', )
+
+        method, target, ver = words
+        if ver != 'HTTP/1.1':
+            raise HTTPError(505, 'HTTP Version Not Supported')
+        return method, target, ver
+
+    def parse_headers(self, rfile):
+        headers = []
+        while True:
+            line = rfile.readline()
+            if line in (b'\r\n', b'\n', b''):
+                break
+
+            headers.append(line)
+            if len(headers) &gt; MAX_HEADERS:
+                raise HTTPError(494, 'Too many headers')
+
+        sheaders = b''.join(headers).decode('utf-8')
+        return Parser().parsestr(sheaders)
+
+    def parse_values(self, req_values):
+        param = req_values.decode('utf-8').split('&amp;')
+        subject = param[0][len('subject='):]
+        grade = param[1][len('grade='):]
+        if not subject or not grade:
+            raise HTTPError(400, 'Bad request', 'Params missing')
+
+        return subject, grade
+
+    def handle_request(self, req):
+        if req.target == '/welcome' and req.method == 'GET':
+            return self.handle_get_welcome()
+
+        if req.method == 'POST':
+            return self.handle_post_subjects(req)
+
+        if req.target.startswith('/subjects') and req.method == 'GET':
+            return self.handle_get_subjects()
+
+        raise HTTPError(404, 'Not found')
+
+    def send_response(self, conn, resp):
+        wfile = conn.makefile('wb')
+        status_line = f'HTTP/1.1 {resp.status} {resp.reason}\r\n'
+        wfile.write(status_line.encode('utf-8'))
+
+        if resp.headers:
+            for (key, value) in resp.headers:
+                header_line = f'{key}: {value}\r\n'
+                wfile.write(header_line.encode('utf-8'))
+
+        wfile.write(b'\r\n')
+
+        if resp.body:
+            wfile.write(resp.body)
+
+        wfile.flush()
+        wfile.close()
+
+    def send_error(self, conn, err):
+        try:
+            status = err.status
+            reason = err.reason
+            body = (err.body or err.reason).encode('utf-8')
+        except Exception:
+            status = 500
+            reason = b'Internal Server Error'
+            body = b'Internal Server Error'
+
+        resp = Response(status, reason, [('Content-Length', len(body))], body)
+        self.send_response(conn, resp)
+
+    def handle_get_welcome(self):
+        content_type = 'text/html; charset=utf-8'
+        work_path = os.getcwd()
+        res_path = ('\\'.join(work_path.split('\\')[:-1]) + '\\res\\welcome.html').replace('\\', '/')
+        with open(res_path) as fin:
+            body = fin.read()
+
+        body = body.encode('utf-8')
+        headers = [('Content-Type', content_type),
+                   ('Content-Length', len(body))]
+        return Response(200, 'OK', headers, body)
+
+    def handle_post_subjects(self, req):
+        req_values = req.rfile.readline()
+        subject, grade = self.parse_values(req_values)
+        subject_id = len(self._subjects) + 1
+        self._subjects[subject_id] = {'id': subject_id, 'subject': subject, 'grade': grade}
+        return Response(204, 'Created')
+
+    def handle_get_subjects(self):
+        content_type = 'text/html; charset=utf-8'
+        body = '&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'
+        body += f'&lt;div&gt;Count of subjects: {len(self._subjects)}&lt;/div&gt;'
+        body += '&lt;ul&gt;'
+        for u in self._subjects.values():
+            body += f'&lt;li&gt;{u[&quot;subject&quot;]}, {u[&quot;grade&quot;]}&lt;/li&gt;'
+        body += '&lt;/ul&gt;'
+        body += '&lt;/body&gt;&lt;/html&gt;'
+
+        body = body.encode('utf-8')
+        headers = [('Content-Type', content_type), ('Content-Length', len(body))]
+        return Response(200, 'OK', headers, body)
+
+
+if __name__ == '__main__':
+    s_host = ''
+    s_port = 8080
+    serv = MyHTTPServer(s_host, s_port)
+    try:
+        serv.serve_forever()
+    except KeyboardInterrupt:
+        pass
+</code></pre>
+<ul>
+<li><code>HTTPError.py</code></li>
+</ul>
+<pre><code class="language-python">class HTTPError(Exception):
+    def __init__(self, status, reason, body=None):
+        super()
+        self.status = status
+        self.reason = reason
+        self.body = body
+</code></pre>
+<ul>
+<li><code>Response.py</code></li>
+</ul>
+<pre><code class="language-python">class Response:
+    def __init__(self, status, reason, headers=None, body=None):
+        self.status = status
+        self.reason = reason
+        self.headers = headers
+        self.body = body
+</code></pre>
+<ul>
+<li><code>Request.py</code></li>
+</ul>
+<pre><code class="language-python">class Request:
+    def __init__(self, method, target, version, headers, rfile):
+        self.method = method
+        self.target = target
+        self.version = version
+        self.headers = headers
+        self.rfile = rfile
+
+    def body(self):
+        size = self.headers.get('Content-Length')
+        if not size:
+            return None
+        return self.rfile.read(size)
+</code></pre>
+<ul>
+<li><code>welcome.html</code></li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta content=&quot;text/html&quot; charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;List of subjects&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;List of subjects&lt;/h1&gt;
+
+    &lt;form action=&quot;&quot; method=&quot;POST&quot;&gt;
+        &lt;p&gt;Write a subject:&lt;/p&gt;
+        &lt;input type=&quot;text&quot; name=&quot;subject&quot; id=&quot;subject&quot; placeholder=&quot;Math&quot;&gt;
+
+        &lt;p&gt;Write a grade:&lt;/p&gt;
+        &lt;input type=&quot;text&quot; name=&quot;grade&quot; id=&quot;grade&quot; placeholder=&quot;1-5&quot;&gt;&lt;br&gt;
+        &lt;br&gt;
+        &lt;button type=&quot;submit&quot; name=&quot;add_subject&quot; id=add_subject&quot;&gt;Add subject&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;br&gt;
+    &lt;form action=&quot;/subjects&quot; method=&quot;GET&quot;&gt;
+        &lt;button type=&quot;submit&quot; name=&quot;see_subjects&quot; id=&quot;see_subjects&quot;&gt;See subjects&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
