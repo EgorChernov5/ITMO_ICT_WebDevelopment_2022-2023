@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Egor Chernov">
+        <link rel="canonical" href="https://egorchernov5.github.io/PW3/pw3-tasks/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>PW 3 - Project documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Project documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Labs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Lr1/lr1-tasks/" class="dropdown-item">Lab 1</a>
+</li>
+                                    
+<li>
+    <a href="../../Lr2/lr2-tasks/" class="dropdown-item">Lab 2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">PW <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active">PW 3</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../Lr2/lr2-tasks/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#structure-of-practical-works" class="nav-link">Structure of practical works</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#pw-31" class="nav-link">PW 3.1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#pw-32" class="nav-link">PW 3.2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#pw-33" class="nav-link">PW 3.3</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="structure-of-practical-works">Structure of practical works</h2>
+<ul>
+<li><strong>PW 3.1</strong> - Django Web framework</li>
+<li><strong>PW 3.2</strong> - Django rest framework</li>
+<li><strong>PW 3.3</strong> - Documentation</li>
+</ul>
+<h2 id="pw-31">PW 3.1</h2>
+<h3 id="1-task">1 task</h3>
+<ul>
+<li><code>practical3_1_1.py</code></li>
+</ul>
+<p>Script for adding data:</p>
+<pre><code class="language-python">from cars_first_app.models import *
+
+drivers = []
+for i in range(1, 7):
+    new_driver = Driver(username=f&quot;driver{i}&quot;, first_name=f&quot;TestFN{i}&quot;, last_name=f&quot;TestSN{i}&quot;, birthday=f&quot;2000-07-0{i}&quot;, passport=f&quot;111111111{i}&quot;, password=&quot;123&quot;)
+    drivers.append(new_driver)
+    new_driver.save()
+
+i = 1
+for driver in drivers:
+    new_license = DriverLicense(id_driver=driver, license_number=f&quot;111111111{i}&quot;, type='B', issue_date=f&quot;2022-12-0{i}&quot;)
+    new_license.save()
+    i += 1
+
+cars = []
+for i in range(1, 7):
+    new_car = Car(license_plate=f&quot;a00{i}aa&quot;, car_brand='Prototype', model=f&quot;v{i}&quot;)
+    cars.append(new_car)
+    new_car.save()
+
+for i in range(len(drivers)):
+    new_ownership = Ownership(id_driver=drivers[i], id_car=cars[i], start_date=f&quot;2020-01-0{i+1}&quot;, end_date=f&quot;2022-12-0{i+1}&quot;)
+    new_ownership.save()
+</code></pre>
+<h3 id="2-task">2 task</h3>
+<ul>
+<li><code>models.py</code></li>
+</ul>
+<p>Add related_name into DriverLicense, Ownership models:</p>
+<pre><code class="language-python">class DriverLicense(models.Model):
+    id_driver = models.ForeignKey(Driver, on_delete=models.CASCADE, related_name=&quot;driver_license&quot;)
+    license_number = models.CharField(max_length=10)
+    type = models.CharField(max_length=10)
+    issue_date = models.DateField()
+
+
+class Ownership(models.Model):
+    id_driver = models.ForeignKey(Driver, on_delete=models.CASCADE, related_name=&quot;driver_ownership&quot;)
+    id_car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name=&quot;car_ownership&quot;)
+    start_date = models.DateField(null=False, blank=False)
+    end_date = models.DateField(null=True, blank=True)
+</code></pre>
+<ul>
+<li><code>practical3_1_2.py</code></li>
+</ul>
+<p>Get all cars with "Prototype" brand:</p>
+<pre><code class="language-python">Car.objects.filter(car_brand=&quot;Prototype&quot;)
+</code></pre>
+<p>Get all drivers with "Stive" name:</p>
+<pre><code class="language-python">Driver.objects.filter(first_name=&quot;Stive&quot;)
+</code></pre>
+<p>Get driver license for random driver id:</p>
+<pre><code class="language-python">rand_id_driver = Driver.objects.get(first_name=&quot;TestFN5&quot;).pk
+DriverLicense.objects.get(id_driver=rand_id_driver)
+</code></pre>
+<p>Get all drivers who have a red car:</p>
+<pre><code class="language-python">Driver.objects.filter(driver_ownership__id_car__color=&quot;red&quot;)
+</code></pre>
+<p>Get all drivers who have car from 2020 year:</p>
+<pre><code class="language-python">Driver.objects.filter(driver_ownership__start_date__gte=&quot;2020-01-01&quot;)
+</code></pre>
+<h3 id="3-task">3 task</h3>
+<ul>
+<li><code>practical3_1_3.py</code></li>
+</ul>
+<p>Get date of the oldest driver license:</p>
+<pre><code class="language-python">DriverLicense.objects.aggregate(oldest_license=Min('issue_date'))
+</code></pre>
+<p>Get last date of ownership: </p>
+<pre><code class="language-python">Ownership.objects.aggregate(oldest_license=Max('start_date'))
+</code></pre>
+<p>Get drivers and their ownerships:</p>
+<pre><code class="language-python">counter_car = Driver.objects.annotate(count_car=Count(&quot;driver_ownership&quot;))
+for driver in counter_car:
+    print(driver.pk, driver.count_car)
+</code></pre>
+<p>Get count of each brand cars:</p>
+<pre><code class="language-python">Car.objects.values(&quot;car_brand&quot;).annotate(count=Count(&quot;id&quot;))
+</code></pre>
+<p>Get drivers who sorted by issue date of license:</p>
+<pre><code class="language-python">Driver.objects.order_by('driver_license__issue_date')
+</code></pre>
+<h2 id="pw-32">PW 3.2</h2>
+<h3 id="1-task_1">1 task</h3>
+<ul>
+<li><code>views.py</code></li>
+</ul>
+<p>Add two classes for GET and POST request for driver:</p>
+<pre><code class="language-python">class DriverAPIView(APIView):
+    def get(self, request):
+        drivers = Driver.objects.all()
+        serializer = DriverSerializer(drivers, many=True)
+        return Response({&quot;Drivers&quot;: serializer.data})
+
+
+class CreateDriverAPIView(APIView):
+    def post(self, request):
+        driver = request.data.get(&quot;driver&quot;)
+        serializer = CreateDriverSerializer(data=driver)
+
+        if serializer.is_valid(raise_exception=True):
+            driver_saved = serializer.save()
+
+        return Response({&quot;Success&quot;: &quot;Driver '{}' created succesfully.&quot;.format(driver_saved.username)})
+</code></pre>
+<ul>
+<li><code>serializes.py</code></li>
+</ul>
+<p>For these classes serializers:</p>
+<pre><code class="language-python">class DriverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Driver
+        fields = &quot;__all__&quot;
+
+
+class CreateDriverSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        return Driver.objects.create(**validated_data)
+
+    class Meta:
+        model = Driver
+        fields = &quot;__all__&quot;
+</code></pre>
+<h3 id="2-task_1">2 task</h3>
+<p>Get drivers with license:</p>
+<ul>
+<li><code>views.py</code></li>
+</ul>
+<pre><code class="language-python">class DriverAndLicenseAPIView(generics.ListAPIView):
+    serializer_class = DriverAndLicenseSerializer
+    queryset = Driver.objects.all()
+</code></pre>
+<ul>
+<li><code>serializes.py</code></li>
+</ul>
+<pre><code class="language-python">class DriverLicenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DriverLicense
+        fields = (&quot;pk&quot;, &quot;license_number&quot;, &quot;type&quot;, &quot;issue_date&quot;)
+
+
+class DriverAndLicenseSerializer(serializers.ModelSerializer):
+    driver_license = DriverLicenseSerializer(many=True)
+
+    class Meta:
+        model = Driver
+        fields = (&quot;pk&quot;, &quot;username&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;birthday&quot;,
+                  &quot;passport&quot;, &quot;address&quot;, &quot;nationality&quot;, &quot;driver_license&quot;)
+</code></pre>
+<p>Get driver with license and ownerships:</p>
+<ul>
+<li><code>views.py</code></li>
+</ul>
+<pre><code class="language-python">class RetrieveDriverAPIView(generics.RetrieveAPIView):
+    serializer_class = RetrieveDriverSerializer
+    queryset = Driver.objects.all()
+</code></pre>
+<ul>
+<li><code>serializers.py</code></li>
+</ul>
+<pre><code class="language-python">class DriverOwnershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ownership
+        fields = &quot;__all__&quot;
+
+
+class RetrieveDriverSerializer(serializers.ModelSerializer):
+    driver_ownership = DriverOwnershipSerializer(many=True, read_only=True)
+    driver_license = DriverLicenseSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Driver
+        fields = (&quot;pk&quot;, &quot;username&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;birthday&quot;,
+                  &quot;passport&quot;, &quot;address&quot;, &quot;nationality&quot;, &quot;driver_license&quot;, &quot;driver_ownership&quot;)
+</code></pre>
+<p>PUT and DELETE requests for driver:</p>
+<ul>
+<li><code>views.py</code></li>
+</ul>
+<pre><code class="language-python">class RetrieveDriverUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = RetrieveDriverUpdateDestroySerializer
+    queryset = Driver.objects.all()
+</code></pre>
+<ul>
+<li><code>serializer.py</code></li>
+</ul>
+<pre><code class="language-python">class RetrieveDriverUpdateDestroySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Driver
+        fields = &quot;__all__&quot;
+</code></pre>
+<h2 id="pw-33">PW 3.3</h2>
+<p>Create README.md file. Add swagger at project.</p>
+<p>Add swagger:</p>
+<ul>
+<li><code>settings.py</code></li>
+</ul>
+<pre><code class="language-python">INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'cars_first_app',
+    'rest_framework',
+    'drf_yasg',
+]
+</code></pre>
+<ul>
+<li><code>urls.py</code></li>
+</ul>
+<pre><code class="language-python">from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title=&quot;API&quot;,
+      default_version='v2',
+      description=&quot;Description&quot;,
+      terms_of_service=&quot;https://www.google.com/policies/terms/&quot;,
+      contact=openapi.Contact(email=&quot;hardbeat34@gmail.com&quot;),
+      license=openapi.License(name=&quot;BSD License&quot;),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
+
+urlpatterns = [
+    ...,
+    path('doc/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+]
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
