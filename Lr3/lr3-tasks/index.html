@@ -765,78 +765,116 @@ urlpatterns = [
 </code></pre>
 <h2 id="api">API</h2>
 <p>Structure of API:
-* <strong>hotel</strong>
-* <strong>account_app</strong>
-* <strong>hotel_app</strong>
-* <strong>reg_com_app</strong></p>
+* <strong>hotel</strong></p>
+<ul>
+<li>
+<p><strong>account_app</strong></p>
+</li>
+<li>
+<p><strong>hotel_app</strong></p>
+</li>
+<li>
+<p><strong>reg_com_app</strong></p>
+</li>
+</ul>
 <h3 id="hotel-urls">hotel urls</h3>
-<p><code>doc/swagger/</code>
-* GET</p>
+<p><code>doc/swagger/</code></p>
+<ul>
+<li>GET</li>
+</ul>
 <p>Swagger documentation.</p>
-<p><code>doc/redoc/</code>
-* GET</p>
+<p><code>doc/redoc/</code></p>
+<ul>
+<li>GET</li>
+</ul>
 <p>Redoc documentation.</p>
-<p><code>auth/token/</code>
-* POST</p>
+<p><code>auth/token/</code></p>
+<ul>
+<li>POST</li>
+</ul>
 <p>Get refresh and access token for user.</p>
-<p><code>auth/token/refresh/</code>
-* POST</p>
+<p><code>auth/token/refresh/</code></p>
+<ul>
+<li>POST</li>
+</ul>
 <p>Update refresh and access token for user.</p>
-<p><code>auth/</code>
-* GET</p>
+<p><code>auth/</code></p>
+<ul>
+<li>GET</li>
+</ul>
 <p>Get url for working with user.</p>
 <h3 id="account_app-urls">account_app urls</h3>
-<p><code>account/user/</code>
-* GET (admin, owner)</p>
+<p><code>account/user/</code></p>
+<ul>
+<li>GET (admin, owner)</li>
+</ul>
 <p>List of users.</p>
 <ul>
 <li>POST (allow any)</li>
 </ul>
 <p>Create an account.</p>
-<p><code>account/user/&lt;int:pk&gt;/</code>
-* GET (admin, owner)</p>
+<p><code>account/user/&lt;int:pk&gt;/</code></p>
+<ul>
+<li>GET (admin, owner)</li>
+</ul>
 <p>Get the user info.</p>
 <ul>
 <li>PUT, DELETE (admin, owner)</li>
 </ul>
 <p>Change the user info.</p>
 <h3 id="hotel_app-urls">hotel_app urls</h3>
-<p><code>hotel/</code>
-* GET (allow any)</p>
+<p><code>hotel/</code></p>
+<ul>
+<li>GET (allow any)</li>
+</ul>
 <p>Get list of hotels.</p>
-<p><code>hotel/&lt;int:pk&gt;/</code>
-* GET (allow any)</p>
+<p><code>hotel/&lt;int:pk&gt;/</code></p>
+<ul>
+<li>GET (allow any)</li>
+</ul>
 <p>Get the hotel.</p>
 <ul>
 <li>POST, PUT, DELETE (admin)</li>
 </ul>
 <p>Change the hotel info.</p>
-<p><code>hotel/room_type/&lt;int:pk&gt;/</code>
-* GET (allow any)</p>
+<p><code>hotel/room_type/&lt;int:pk&gt;/</code></p>
+<ul>
+<li>GET (allow any)</li>
+</ul>
 <p>Get the room type.</p>
 <ul>
 <li>POST, PUT, DELETE (admin)</li>
 </ul>
 <p>Change the room type info.</p>
-<p><code>hotel/room_type/room/&lt;int:pk&gt;/</code>
-* GET (allow any)</p>
+<p><code>hotel/room_type/room/&lt;int:pk&gt;/</code></p>
+<ul>
+<li>GET (allow any)</li>
+</ul>
 <p>Get the room.</p>
 <ul>
 <li>POST, PUT, DELETE (admin)</li>
 </ul>
 <p>Change the room info.</p>
 <h3 id="reg_com_app-urls">reg_com_app urls</h3>
-<p><code>reg/</code>
-* GET, POST (admin, owner)</p>
+<p><code>reg/</code></p>
+<ul>
+<li>GET, POST (admin, owner)</li>
+</ul>
 <p>Get list of registrations.</p>
-<p><code>reg/&lt;int:pk&gt;/</code>
-* GET, PUT, DELETE (admin, owner)</p>
+<p><code>reg/&lt;int:pk&gt;/</code></p>
+<ul>
+<li>GET, PUT, DELETE (admin, owner)</li>
+</ul>
 <p>Get or change registration info.</p>
-<p><code>com/</code>
-* GET, POST (admin, owner)</p>
+<p><code>com/</code></p>
+<ul>
+<li>GET, POST (admin, owner)</li>
+</ul>
 <p>Get list of comments.</p>
-<p><code>com/&lt;int:pk&gt;/</code>
-* GET, PUT, DELETE (admin, owner)</p>
+<p><code>com/&lt;int:pk&gt;/</code></p>
+<ul>
+<li>GET, PUT, DELETE (admin, owner)</li>
+</ul>
 <p>Get or change comment info.</p></div>
             </div>
         </div>
