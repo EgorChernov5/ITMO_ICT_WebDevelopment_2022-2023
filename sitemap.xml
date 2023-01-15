@@ -2,22 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://egorchernov5.github.io/</loc>
-         <lastmod>2022-12-25</lastmod>
+         <lastmod>2023-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://egorchernov5.github.io/Lr1/lr1-tasks/</loc>
-         <lastmod>2022-12-25</lastmod>
+         <lastmod>2023-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://egorchernov5.github.io/Lr2/lr2-tasks/</loc>
-         <lastmod>2022-12-25</lastmod>
+         <lastmod>2023-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://egorchernov5.github.io/Lr3/lr3-tasks/</loc>
+         <lastmod>2023-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://egorchernov5.github.io/PW3/pw3-tasks/</loc>
-         <lastmod>2022-12-25</lastmod>
+         <lastmod>2023-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
