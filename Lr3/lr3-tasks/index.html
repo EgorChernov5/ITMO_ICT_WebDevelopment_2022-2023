@@ -51,6 +51,10 @@
 <li>
     <a href="./" class="dropdown-item active">Lab 3</a>
 </li>
+                                    
+<li>
+    <a href="../../Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -76,7 +80,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../../PW3/pw3-tasks/" class="nav-link">
+                                <a rel="next" href="../../Lr4/lr4-tasks/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -156,7 +160,6 @@
     'account_app',
     'reg_com_app',
 ]
-
 MIDDLEWARE = [
     ...,
     'corsheaders.middleware.CorsMiddleware',
@@ -196,7 +199,6 @@ MIDDLEWARE = [
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,
-
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
@@ -204,24 +206,19 @@ MIDDLEWARE = [
     'ISSUER': None,
     'JWK_URL': None,
     'LEEWAY': 0,
-
     'AUTH_HEADER_TYPES': ('Bearer',),
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
     'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
-
     'JTI_CLAIM': 'jti',
-
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=30),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
 CORS_ALLOW_ALL_ORIGINS = True
 </code></pre>
 <ul>
@@ -237,8 +234,6 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
-
 schema_view = get_schema_view(
     openapi.Info(
         title=&quot;API&quot;,
@@ -251,7 +246,6 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=[permissions.AllowAny, ],
 )
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('doc/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
@@ -271,16 +265,11 @@ urlpatterns = [
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
 from hotel_app.models import Hotel
-
-
 class Guest(models.Model):
     user_g = models.OneToOneField(User, on_delete=models.CASCADE, related_name=&quot;user_guest&quot;, verbose_name='ID User')
     phone_guest = models.CharField(max_length=10, verbose_name=&quot;Phone&quot;)
     passport_guest = models.CharField(max_length=10, null=True, blank=True, verbose_name=&quot;Passport&quot;)
-
-
 class Employee(models.Model):
     user_empl = models.OneToOneField(User, on_delete=models.CASCADE, related_name=&quot;user_employee&quot;,
                                      verbose_name='ID User')
@@ -288,14 +277,10 @@ class Employee(models.Model):
                                    related_name=&quot;hotel_employee&quot;, verbose_name='ID Hotel')
     phone_employee = models.CharField(max_length=10, verbose_name=&quot;Phone&quot;)
     position_employee = models.CharField(max_length=100, verbose_name=&quot;Position&quot;)
-
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Guest.objects.create(user_g=instance)
-
-
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     if instance.is_staff:
@@ -318,14 +303,11 @@ def save_user_profile(sender, instance, **kwargs):
 </ul>
 <p>Create permission:</p>
 <pre><code class="language-python">from rest_framework import permissions
-
-
 class IsOwner(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.user.is_authenticated:
             return True
         return False
-
     def has_object_permission(self, request, view, obj):
         if obj.author == request.user:
             return True
@@ -338,15 +320,11 @@ class IsOwner(permissions.BasePermission):
 <pre><code class="language-python">from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, AllowAny
 from django.contrib.auth.models import User
-
 from .serializers import MyUserSerializer
 from .permissions import IsOwner
-
-
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = MyUserSerializer
-
     def get_permissions(self):
         if self.action == 'create':
             self.permission_classes = [AllowAny, ]
@@ -360,27 +338,19 @@ class UserViewSet(viewsets.ModelViewSet):
 <p>Add serializers:</p>
 <pre><code class="language-python">from rest_framework import serializers
 from django.contrib.auth.models import User
-
 from .models import Guest, Employee
-
-
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
         fields = ('phone_guest', 'passport_guest')
-
-
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = ('hotel_empl', 'phone_employee', 'position_employee')
         depth = 1
-
-
 class MyUserSerializer(serializers.ModelSerializer):
     user_guest = GuestSerializer(required=False)
     user_employee = EmployeeSerializer(required=False)
-
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'user_guest', 'user_employee')
@@ -390,10 +360,7 @@ class MyUserSerializer(serializers.ModelSerializer):
 </ul>
 <p>Add urls:</p>
 <pre><code class="language-python">from django.urls import path
-
 from .views import UserViewSet
-
-
 urlpatterns = [
     path('user/', UserViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('user/&lt;int:pk&gt;/', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
@@ -406,8 +373,6 @@ urlpatterns = [
 <p>Add models:</p>
 <pre><code class="language-python">from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
-
 class Hotel(models.Model):
     name_hotel = models.CharField(max_length=100, verbose_name='Name')
     city_hotel = models.CharField(max_length=100, verbose_name='City')
@@ -417,15 +382,12 @@ class Hotel(models.Model):
                                                     blank=True,
                                                     verbose_name='Rating')
     des_hotel = models.CharField(max_length=255, null=True, blank=True, verbose_name='Description')
-
-
 class RoomType(models.Model):
     TYPE_CHOICES = [
         (&quot;E&quot;, 'Econom'),
         (&quot;S&quot;, 'Standard'),
         (&quot;L&quot;, 'Lux'),
     ]
-
     hotel_rt = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name=&quot;hotel_room_type&quot;,
                                  verbose_name='ID Hotel')
     type_rt = models.CharField(max_length=1, choices=TYPE_CHOICES, verbose_name='Type')
@@ -435,15 +397,12 @@ class RoomType(models.Model):
                                                  verbose_name='Rating')
     price_rt = models.PositiveIntegerField(verbose_name='Price')
     des_rt = models.CharField(max_length=255, null=True, blank=True, verbose_name='Description')
-
-
 class Room(models.Model):
     STATUS_CHOICES = [
         (&quot;F&quot;, 'Free'),
         (&quot;T&quot;, 'Taken'),
         (&quot;B&quot;, 'Booked'),
     ]
-
     hotel_r = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name=&quot;hotel_room&quot;, verbose_name='ID Hotel')
     rt_r = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name=&quot;rt_room&quot;, verbose_name='ID Room type')
     number_room = models.PositiveIntegerField(verbose_name='Number')
@@ -456,39 +415,29 @@ class Room(models.Model):
 <p>Add views:</p>
 <pre><code class="language-python">from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, AllowAny
-
 from .models import Hotel, RoomType, Room
 from .serializers import HotelSerializer, RoomTypeSerializer, RoomSerializer
-
-
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
-
     def get_permissions(self):
         if self.action in ('list', 'retrieve'):
             self.permission_classes = [AllowAny, ]
         elif self.action in ('retrieve', 'create', 'update', 'destroy'):
             self.permission_classes = [IsAdminUser, ]
         return [permission() for permission in self.permission_classes]
-
-
 class RoomTypeViewSet(viewsets.ModelViewSet):
     queryset = RoomType.objects.all()
     serializer_class = RoomTypeSerializer
-
     def get_permissions(self):
         if self.action in ('list', 'retrieve'):
             self.permission_classes = [AllowAny, ]
         elif self.action in ('retrieve', 'create', 'update', 'destroy'):
             self.permission_classes = [IsAdminUser, ]
         return [permission() for permission in self.permission_classes]
-
-
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-
     def get_permissions(self):
         if self.action in ('list', 'retrieve'):
             self.permission_classes = [AllowAny, ]
@@ -501,59 +450,41 @@ class RoomViewSet(viewsets.ModelViewSet):
 </ul>
 <p>Add serializers:</p>
 <pre><code class="language-python">from rest_framework import serializers
-
 from .models import Hotel, RoomType, Room
-
-
 # Common
 class CommonHotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
         fields = ('id', 'name_hotel')
-
-
 class CommonRoomTypeSerializer(serializers.ModelSerializer):
     type_rt = serializers.CharField(source='get_type_rt_display')
-
     class Meta:
         model = RoomType
         fields = ('id', 'type_rt', 'rating_rt', 'price_rt', 'des_rt')
-
-
 # Hotel
 class HotelSerializer(serializers.ModelSerializer):
     hotel_room_type = CommonRoomTypeSerializer(many=True)
-
     class Meta:
         model = Hotel
         fields = '__all__'
-
-
 # RoomType
 class RoomTypeRoomSerializer(serializers.ModelSerializer):
     status_room = serializers.CharField(source='get_status_room_display')
-
     class Meta:
         model = Room
         fields = ('id', 'number_room', 'status_room', 'review_room')
-
-
 class RoomTypeSerializer(serializers.ModelSerializer):
     hotel_rt = CommonHotelSerializer()
     rt_room = RoomTypeRoomSerializer(many=True)
     type_rt = serializers.CharField(source='get_type_rt_display')
-
     class Meta:
         model = RoomType
         fields = '__all__'
-
-
 # Room
 class RoomSerializer(serializers.ModelSerializer):
     hotel_r = CommonHotelSerializer()
     rt_r = CommonRoomTypeSerializer()
     status_room = serializers.CharField(source='get_status_room_display')
-
     class Meta:
         model = Room
         fields = '__all__'
@@ -563,9 +494,7 @@ class RoomSerializer(serializers.ModelSerializer):
 </ul>
 <p>Add urls:</p>
 <pre><code class="language-python">from django.urls import path, include
-
 from .views import HotelViewSet, RoomTypeViewSet, RoomViewSet
-
 urlpatterns = [
     path('account/', include('account_app.urls')),
     path('act/', include('reg_com_app.urls')),
@@ -583,10 +512,7 @@ urlpatterns = [
 <pre><code class="language-python">from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-
 from hotel_app.models import Hotel, RoomType, Room
-
-
 class Registration(models.Model):
     STATUS_REG_CHOICES = [
         ('T', 'Taken'),
@@ -596,7 +522,6 @@ class Registration(models.Model):
         ('YP', 'Paid for'),
         ('NP', 'Not paid for'),
     ]
-
     user_reg = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
                                  related_name='user_registration', verbose_name='ID User')
     hotel_reg = models.ForeignKey(Hotel, on_delete=models.SET_NULL, null=True, blank=True,
@@ -605,20 +530,16 @@ class Registration(models.Model):
                                related_name='rt_registration', verbose_name='ID Room type')
     room_reg = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True,
                                  related_name='room_registration', verbose_name='ID Room')
-
     employee_reg = models.PositiveIntegerField(null=True, blank=True, verbose_name='ID Employee')
     status_reg_reg = models.CharField(max_length=1, choices=STATUS_REG_CHOICES, verbose_name='Registration status')
     status_pay_reg = models.CharField(max_length=2, choices=STATUS_PAY_CHOICES, verbose_name='Payment status')
     check_in_reg = models.DateField(null=False, blank=False, verbose_name='Check in')
     check_out_reg = models.DateField(null=False, blank=False, verbose_name='Check out')
     booking_reg = models.DateField(null=False, blank=False, verbose_name='Booking date')
-
-
 class Comment(models.Model):
     user_com = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='user_comment',
                                  verbose_name='ID Guest')
     room_com = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_comment', verbose_name='ID Room')
-
     rating_com = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
                                                   verbose_name='Rating')
     review_com = models.TextField(max_length=255, null=True, blank=True, verbose_name='Review')
@@ -630,14 +551,11 @@ class Comment(models.Model):
 </ul>
 <p>Create permissions:</p>
 <pre><code class="language-python">from rest_framework import permissions
-
-
 class IsOwner(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.user.is_authenticated:
             return True
         return False
-
     def has_object_permission(self, request, view, obj):
         if obj.author == request.user:
             return True
@@ -649,27 +567,20 @@ class IsOwner(permissions.BasePermission):
 <p>Add views:</p>
 <pre><code class="language-python">from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, AllowAny
-
 from .models import Registration, Comment
 from .serializers import RegistrationSerializer, CommentSerializer
 from .permisions import IsOwner
-
-
 class RegistrationViewSet(viewsets.ModelViewSet):
     serializer_class = RegistrationSerializer
     permission_classes = [IsAdminUser | IsOwner, ]
-
     def get_queryset(self):
         user = self.request.user
         if user.is_staff:
             return Registration.objects.all()
         return Registration.objects.filter(user_reg=user)
-
-
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-
     def get_permissions(self):
         if self.action in ('list', 'retrieve'):
             self.permission_classes = [AllowAny, ]
@@ -682,40 +593,28 @@ class CommentViewSet(viewsets.ModelViewSet):
 </ul>
 <p>Add serializers:</p>
 <pre><code class="language-python">from rest_framework import serializers
-
 from django.contrib.auth.models import User
 from .models import Registration, Comment
 from hotel_app.models import Hotel, RoomType, Room
-
-
 # Common
 class RegComUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username')
-
-
 class RegComHotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
         fields = ('id', 'name_hotel')
-
-
 class RegComRoomTypeSerializer(serializers.ModelSerializer):
     type_rt = serializers.CharField(source='get_type_rt_display')
-
     class Meta:
         model = RoomType
         fields = ('id', 'type_rt', 'price_rt')
-
-
 # Registration
 class RegistrationRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ('id', 'number_room')
-
-
 class RegistrationSerializer(serializers.ModelSerializer):
     user_reg = RegComUserSerializer()
     hotel_reg = RegComHotelSerializer()
@@ -723,27 +622,20 @@ class RegistrationSerializer(serializers.ModelSerializer):
     room_reg = RegistrationRoomSerializer()
     status_reg_reg = serializers.CharField(source='get_status_reg_reg_display')
     status_pay_reg = serializers.CharField(source='get_status_pay_reg_display')
-
     class Meta:
         model = Registration
         fields = '__all__'
-
-
 # Comment
 class CommentRoomSerializer(serializers.ModelSerializer):
     hotel_r = RegComHotelSerializer()
     rt_r = RegComRoomTypeSerializer()
     status_room = serializers.CharField(source='get_status_room_display')
-
     class Meta:
         model = Room
         fields = '__all__'
-
-
 class CommentSerializer(serializers.ModelSerializer):
     user_com = RegComUserSerializer()
     room_com = CommentRoomSerializer()
-
     class Meta:
         model = Comment
         fields = '__all__'
@@ -753,9 +645,7 @@ class CommentSerializer(serializers.ModelSerializer):
 </ul>
 <p>Add urls:</p>
 <pre><code class="language-python">from django.urls import path
-
 from .views import RegistrationViewSet, CommentViewSet
-
 urlpatterns = [
     path('reg/', RegistrationViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('reg/&lt;int:pk&gt;/', RegistrationViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
@@ -765,116 +655,78 @@ urlpatterns = [
 </code></pre>
 <h2 id="api">API</h2>
 <p>Structure of API:
-* <strong>hotel</strong></p>
-<ul>
-<li>
-<p><strong>account_app</strong></p>
-</li>
-<li>
-<p><strong>hotel_app</strong></p>
-</li>
-<li>
-<p><strong>reg_com_app</strong></p>
-</li>
-</ul>
+* <strong>hotel</strong>
+* <strong>account_app</strong>
+* <strong>hotel_app</strong>
+* <strong>reg_com_app</strong></p>
 <h3 id="hotel-urls">hotel urls</h3>
-<p><code>doc/swagger/</code></p>
-<ul>
-<li>GET</li>
-</ul>
+<p><code>doc/swagger/</code>
+* GET</p>
 <p>Swagger documentation.</p>
-<p><code>doc/redoc/</code></p>
-<ul>
-<li>GET</li>
-</ul>
+<p><code>doc/redoc/</code>
+* GET</p>
 <p>Redoc documentation.</p>
-<p><code>auth/token/</code></p>
-<ul>
-<li>POST</li>
-</ul>
+<p><code>auth/token/</code>
+* POST</p>
 <p>Get refresh and access token for user.</p>
-<p><code>auth/token/refresh/</code></p>
-<ul>
-<li>POST</li>
-</ul>
+<p><code>auth/token/refresh/</code>
+* POST</p>
 <p>Update refresh and access token for user.</p>
-<p><code>auth/</code></p>
-<ul>
-<li>GET</li>
-</ul>
+<p><code>auth/</code>
+* GET</p>
 <p>Get url for working with user.</p>
 <h3 id="account_app-urls">account_app urls</h3>
-<p><code>account/user/</code></p>
-<ul>
-<li>GET (admin, owner)</li>
-</ul>
+<p><code>account/user/</code>
+* GET (admin, owner)</p>
 <p>List of users.</p>
 <ul>
 <li>POST (allow any)</li>
 </ul>
 <p>Create an account.</p>
-<p><code>account/user/&lt;int:pk&gt;/</code></p>
-<ul>
-<li>GET (admin, owner)</li>
-</ul>
+<p><code>account/user/&lt;int:pk&gt;/</code>
+* GET (admin, owner)</p>
 <p>Get the user info.</p>
 <ul>
 <li>PUT, DELETE (admin, owner)</li>
 </ul>
 <p>Change the user info.</p>
 <h3 id="hotel_app-urls">hotel_app urls</h3>
-<p><code>hotel/</code></p>
-<ul>
-<li>GET (allow any)</li>
-</ul>
+<p><code>hotel/</code>
+* GET (allow any)</p>
 <p>Get list of hotels.</p>
-<p><code>hotel/&lt;int:pk&gt;/</code></p>
-<ul>
-<li>GET (allow any)</li>
-</ul>
+<p><code>hotel/&lt;int:pk&gt;/</code>
+* GET (allow any)</p>
 <p>Get the hotel.</p>
 <ul>
 <li>POST, PUT, DELETE (admin)</li>
 </ul>
 <p>Change the hotel info.</p>
-<p><code>hotel/room_type/&lt;int:pk&gt;/</code></p>
-<ul>
-<li>GET (allow any)</li>
-</ul>
+<p><code>hotel/room_type/&lt;int:pk&gt;/</code>
+* GET (allow any)</p>
 <p>Get the room type.</p>
 <ul>
 <li>POST, PUT, DELETE (admin)</li>
 </ul>
 <p>Change the room type info.</p>
-<p><code>hotel/room_type/room/&lt;int:pk&gt;/</code></p>
-<ul>
-<li>GET (allow any)</li>
-</ul>
+<p><code>hotel/room_type/room/&lt;int:pk&gt;/</code>
+* GET (allow any)</p>
 <p>Get the room.</p>
 <ul>
 <li>POST, PUT, DELETE (admin)</li>
 </ul>
 <p>Change the room info.</p>
 <h3 id="reg_com_app-urls">reg_com_app urls</h3>
-<p><code>reg/</code></p>
-<ul>
-<li>GET, POST (admin, owner)</li>
-</ul>
+<p><code>reg/</code>
+* GET, POST (admin, owner)</p>
 <p>Get list of registrations.</p>
-<p><code>reg/&lt;int:pk&gt;/</code></p>
-<ul>
-<li>GET, PUT, DELETE (admin, owner)</li>
-</ul>
+<p><code>reg/&lt;int:pk&gt;/</code>
+* GET, PUT, DELETE (admin, owner)</p>
 <p>Get or change registration info.</p>
-<p><code>com/</code></p>
-<ul>
-<li>GET, POST (admin, owner)</li>
-</ul>
+<p><code>com/</code>
+* GET, POST (admin, owner)</p>
 <p>Get list of comments.</p>
-<p><code>com/&lt;int:pk&gt;/</code></p>
-<ul>
-<li>GET, PUT, DELETE (admin, owner)</li>
-</ul>
+<p><code>com/&lt;int:pk&gt;/</code>
+* GET, PUT, DELETE (admin, owner)</p>
 <p>Get or change comment info.</p></div>
             </div>
         </div>

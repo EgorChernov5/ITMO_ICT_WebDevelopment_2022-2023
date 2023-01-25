@@ -51,6 +51,10 @@
 <li>
     <a href="../../Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
 </li>
+                                    
+<li>
+    <a href="../../Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -182,8 +186,6 @@
 </ul>
 <pre><code class="language-python">from django.contrib import admin
 from django.urls import include, path
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
@@ -194,8 +196,6 @@ urlpatterns = [
 <li><code>models.py</code></li>
 </ul>
 <pre><code class="language-python">from django.contrib.auth.models import AbstractUser
-
-
 class User(AbstractUser):
     pass
 </code></pre>
@@ -204,8 +204,6 @@ class User(AbstractUser):
 </ul>
 <pre><code class="language-python">from django.urls import path, include
 from .views import *
-
-
 urlpatterns = [
     path('', RegView.as_view(), name='index'),
     path('error/', error, name='error'),
@@ -227,31 +225,22 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 from datetime import date
-
 from .forms import *
 from hotel_first_app.models import Registration
-
-
 class ReserveDeleteView(DeleteView):
     model = Registration
     template_name = 'delete_reserve.html'
     success_url = '/hotels/hotels/'
-
-
 class UpdateReserveView(UpdateView):
     form_class = UpdateReserveForm
     template_name = 'update_reserve.html'
     context_object_name = 'reg'
-
     def get_queryset(self):
         self.success_url = f&quot;/account/{self.kwargs['id_user']}&quot;
         return Registration.objects.filter(pk=self.kwargs['pk'])
-
-
 class AccountUserView(UpdateView):
     form_class = AccountForm
     template_name = 'account.html'
-
     def get_context_data(self, **kwargs):
         context = super(AccountUserView, self).get_context_data(**kwargs)
         cur_date = date.today()
@@ -262,21 +251,15 @@ class AccountUserView(UpdateView):
         context['guest_registrations'] = Registration.objects.filter(id_guest=self.kwargs['pk'])
         context['guests'] = User.objects.filter(is_superuser=False)
         return context
-
     def get_queryset(self):
         self.success_url = f&quot;/account/{self.kwargs['pk']}&quot;
         return User.objects.filter(pk=self.kwargs['pk'])
-
-
 def error(request):
     return render(request, 'error.html')
-
-
 class RegView(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'index.html'
     success_url = 'hotels'
-
     def post(self, request, *args, **kwargs):
         form = CustomUserCreationForm(request.POST)
         context = {'username': &quot;&quot;}
@@ -288,16 +271,11 @@ class RegView(CreateView):
             login(request, user)
             return redirect('hotels')
         return render(request, 'error.html')
-
-
 class LogInView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'login.html'
-
     def get_success_url(self):
         return reverse_lazy('hotels')
-
-
 class LogOutView(LogoutView):
     def get_success_url(self):
         return reverse_lazy('index')
@@ -309,28 +287,20 @@ class LogOutView(LogoutView):
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 from hotel_first_app.models import Registration
-
-
 class UpdateReserveForm(forms.ModelForm):
     class Meta:
         model = Registration
         fields = ('id_reg', 'id_employee', 'id_guest', 'id_room', 'status_reg',
                   'status_pay', 'check_in', 'check_out', 'booking')
-
-
 class AccountForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
-
-
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username',
                   'email',)
-
-
 class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = User
@@ -342,10 +312,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 </ul>
 <pre><code class="language-python">from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
 from account.models import User
-
-
 class Hotel(models.Model):
     id_hotel = models.IntegerField(primary_key=True, verbose_name='ID Hotel')
     name_hotel = models.CharField(max_length=100, verbose_name='Name')
@@ -356,18 +323,14 @@ class Hotel(models.Model):
                                                     blank=True,
                                                     verbose_name='Rating')
     des_hotel = models.CharField(max_length=255, null=True, blank=True, verbose_name='Description')
-
 class Employee(models.Model):
     id_employee = models.IntegerField(primary_key=True, verbose_name='ID Employee')
     id_hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='ID Hotel')
     first_name_employee = models.CharField(max_length=30, verbose_name='First name')
     last_name_employee = models.CharField(max_length=30, verbose_name='Last name')
     phone_employee = models.CharField(max_length=12, verbose_name='Phone')
-
     class Meta:
         ordering = [&quot;first_name_employee&quot;, &quot;last_name_employee&quot;]
-
-
 class RoomType(models.Model):
     ECONOM = 'E'
     STANDARD = 'S'
@@ -386,11 +349,8 @@ class RoomType(models.Model):
                                                  verbose_name='Rating')
     price_rt = models.PositiveIntegerField(verbose_name='Price')
     des_rt = models.CharField(max_length=255, null=True, blank=True, verbose_name='Description')
-
     class Meta:
         ordering = [&quot;id_rt&quot;]
-
-
 class Room(models.Model):
     FREE = 'F'
     TAKEN = 'T'
@@ -406,11 +366,8 @@ class Room(models.Model):
     number_room = models.IntegerField(verbose_name='Number')
     status_room = models.CharField(max_length=1, choices=STATUS_CHOICES, default='F', verbose_name='Status')
     review_room = models.CharField(max_length=255, null=True, blank=True, verbose_name='Review')
-
     class Meta:
         ordering = [&quot;number_room&quot;]
-
-
 class Registration(models.Model):
     TAKEN = 'T'
     BOOKED = 'B'
@@ -433,11 +390,8 @@ class Registration(models.Model):
     check_in = models.DateField(null=False, blank=False, verbose_name='Check in')
     check_out = models.DateField(null=False, blank=False, verbose_name='Check out')
     booking = models.DateField(null=False, blank=False, verbose_name='Booking date')
-
     class Meta:
         ordering = [&quot;-check_in&quot;, &quot;-check_out&quot;]
-
-
 class Comment(models.Model):
     id_guest = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='ID Guest')
     id_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, verbose_name='ID Room')
@@ -453,8 +407,6 @@ class Comment(models.Model):
 </ul>
 <pre><code class="language-python">from django.urls import path
 from .views import *
-
-
 urlpatterns = [
     path('hotels/', HotelListView.as_view(), name='hotels'),
     path('hotels/&lt;int:pk&gt;/', HotelView.as_view(), name='hotel'),
@@ -469,15 +421,11 @@ urlpatterns = [
 </ul>
 <pre><code class="language-python">from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, DetailView
-
 from .forms import *
 from .models import *
-
-
 class ReserveView(CreateView):
     form_class = ReserveForm
     template_name = 'reserve.html'
-
     def post(self, request, *args, **kwargs):
         form = ReserveForm(request.POST)
         if form.is_valid():
@@ -485,19 +433,15 @@ class ReserveView(CreateView):
             print(request)
             return redirect('hotels')
         return render(request, 'error.html')
-
-
 class CommentView(CreateView):
     form_class = CommentForm
     template_name = 'comment.html'
-
     def get_context_data(self, **kwargs):
         context = super(CommentView, self).get_context_data(**kwargs)
         context['hotel'] = Hotel.objects.get(pk=self.kwargs['id_hotel'])
         context['room_type'] = RoomType.objects.get(pk=self.kwargs['id_rt'])
         context['room'] = Room.objects.get(pk=self.kwargs['id_room'])
         return context
-
     def get(self, request, *args, **kwargs):
         form = CommentForm()
         context = {'form': form,
@@ -505,7 +449,6 @@ class CommentView(CreateView):
                    'room_type': RoomType.objects.get(pk=self.kwargs['id_rt']),
                    'room': Room.objects.get(pk=self.kwargs['id_room'])}
         return render(request, 'comment.html', context)
-
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -513,52 +456,39 @@ class CommentView(CreateView):
             print(request)
             return redirect('room', id_hotel=self.kwargs['id_hotel'], id_rt=self.kwargs['id_rt'], pk=self.kwargs['id_room'])
         return render(request, 'error.html')
-
-
 class RoomView(DetailView):
     model = Room
     template_name = 'room.html'
     context_object_name = 'room'
-
     def get_context_data(self, **kwargs):
         context = super(RoomView, self).get_context_data(**kwargs)
         context['hotel'] = Hotel.objects.get(pk=self.kwargs['id_hotel'])
         context['room_type'] = RoomType.objects.get(pk=self.kwargs['id_rt'])
         context['comments'] = Comment.objects.filter(id_room=self.kwargs['pk'])
         return context
-
-
 class RoomListView(ListView):
     model = Room
     template_name = 'rooms.html'
     context_object_name = 'rooms'
-
     def get_context_data(self, **kwargs):
         context = super(RoomListView, self).get_context_data(**kwargs)
         context['hotel'] = Hotel.objects.get(pk=self.kwargs['id_hotel'])
         context['room_type'] = RoomType.objects.get(pk=self.kwargs['id_rt'])
         return context
-
     def get_queryset(self):
         return Room.objects.filter(id_rt=self.kwargs['id_rt'])
-
-
 class HotelView(DetailView):
     model = Hotel
     template_name = 'hotel.html'
     context_object_name = 'hotel'
-
     def get_context_data(self, **kwargs):
         context = super(HotelView, self).get_context_data(**kwargs)
         context['room_types'] = RoomType.objects.filter(id_hotel=self.kwargs['pk'])
         return context
-
-
 class HotelListView(ListView):
     model = Hotel
     template_name = 'hotels.html'
     context_object_name = 'hotels'
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(HotelListView, self).get_context_data(**kwargs)
         return context
@@ -569,15 +499,11 @@ class HotelListView(ListView):
 <pre><code class="language-python">from django import forms
 from .models import Comment
 from .models import Registration
-
-
 class ReserveForm(forms.ModelForm):
     class Meta:
         model = Registration
         fields = ('id_reg', 'id_employee', 'id_guest', 'id_room', 'status_reg',
                   'status_pay', 'check_in', 'check_out', 'booking')
-
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

@@ -51,6 +51,10 @@
 <li>
     <a href="../../Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
 </li>
+                                    
+<li>
+    <a href="../../Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -132,9 +136,7 @@
 <li><code>ServerSide.py</code></li>
 </ul>
 <pre><code class="language-python">import socket
-
 sock = socket.socket()
-
 # if &quot;127.0.0.1&quot; - connect only my cp host, if &quot;0.0.0.0&quot;- connect all hosts
 # 8080 - port
 sock.bind((&quot;&quot;, 8080))
@@ -158,9 +160,7 @@ conn.close()
 <li><code>ClientSide.py</code></li>
 </ul>
 <pre><code class="language-python">import socket
-
 sock = socket.socket()
-
 # connect to port which is listening server
 sock.connect((&quot;127.0.0.1&quot;, 8080))
 massage = &quot;Hello, server&quot;
@@ -175,8 +175,6 @@ print(&quot;Client: &quot; + decodeData)
 </ul>
 <pre><code class="language-python">import socket
 import math
-
-
 def math_square(m_data):
     split_str = m_data.split()
     if split_str[0] == &quot;a&quot;:
@@ -187,8 +185,6 @@ def math_square(m_data):
         return (1 / 2) * int(split_str[1]) * int(split_str[2]) * math.sin(math.radians(int(split_str[3])))
     else:
         return 0
-
-
 sock = socket.socket()
 sock.bind((&quot;&quot;, 8080))
 sock.listen(1)
@@ -215,7 +211,6 @@ finally:
 <li><code>ClientSide.py</code></li>
 </ul>
 <pre><code class="language-python">import socket
-
 sock = socket.socket()
 sock.connect((&quot;127.0.0.1&quot;, 8080))
 massage = input(&quot;Which formula do you prefer?\na. S = a*h\nb. S = a*b*sin(a^b)\n&quot;
@@ -232,8 +227,6 @@ print(&quot;Answer: &quot; + decodeData)
 </ul>
 <pre><code class="language-python">import socket
 import os
-
-
 with socket.socket() as s:
     s.bind(('', 8080))
     s.listen(1)
@@ -251,8 +244,6 @@ with socket.socket() as s:
 <li><code>ClientSide.py</code></li>
 </ul>
 <pre><code class="language-python">import socket
-
-
 with socket.socket() as s:
     s.connect(('127.0.0.1', 8080))
     s.settimeout(5)
@@ -282,8 +273,6 @@ with socket.socket() as s:
 </ul>
 <pre><code class="language-python">import socket
 import threading
-
-
 def accept():
     while 1:
         try:
@@ -299,8 +288,6 @@ def accept():
             t_in.start()
         except socket.error:
             break
-
-
 def in_data(t_conn):
     t_user = t_conn.getpeername()[1]
     while 1:
@@ -314,8 +301,6 @@ def in_data(t_conn):
         except socket.error:
             print(f&quot;User {t_user} left&quot;)
             break
-
-
 def out_data(t_conn, message):
     t_user = t_conn.getpeername()[1]
     if message == '/exit':
@@ -328,8 +313,6 @@ def out_data(t_conn, message):
         if user == t_conn:
             continue
         user.send(specific_message)
-
-
 if __name__ == &quot;__main__&quot;:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         host = ''
@@ -355,8 +338,6 @@ if __name__ == &quot;__main__&quot;:
 <pre><code class="language-python">import socket
 import threading
 import time
-
-
 def out_data():
     time.sleep(2)
     m = 'Hi, i\'m 0\n'
@@ -372,8 +353,6 @@ def out_data():
     print(f'You ({s.getsockname()[1]}): No, {m}')
     time.sleep(5)
     s.send(b'/exit')
-
-
 if __name__ == &quot;__main__&quot;:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         host = '127.0.0.1'
@@ -403,8 +382,6 @@ if __name__ == &quot;__main__&quot;:
 <pre><code class="language-python">import socket
 import threading
 import time
-
-
 def out_data():
     time.sleep(2)
     m = 'Hiii, i\'m 1\n'
@@ -419,8 +396,6 @@ def out_data():
     print(f'You ({s.getsockname()[1]}): {m}')
     time.sleep(5)
     s.send(b'/exit')
-
-
 if __name__ == &quot;__main__&quot;:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         host = '127.0.0.1'
@@ -454,17 +429,12 @@ from email.parser import Parser
 from HTTPError import HTTPError
 from Response import Response
 from Request import Request
-
-
 MAX_HEADERS = 100
-
-
 class MyHTTPServer:
     def __init__(self, host, port):
         self._host = host
         self._port = port
         self._subjects = {}
-
     def serve_forever(self):
         serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
@@ -478,7 +448,6 @@ class MyHTTPServer:
                     print('Client serving failed', e)
         finally:
             serv_sock.close()
-
     def serve_client(self, conn):
         try:
             # Parse request and return Request(method, target, ver, headers, rfile)
@@ -488,82 +457,63 @@ class MyHTTPServer:
             self.send_response(conn, resp)
         except Exception as e:
             self.send_error(conn, e)
-
         if conn:
             req.rfile.close()
             conn.close()
-
     def parse_request(self, conn):
         rfile = conn.makefile('rb')
         method, target, ver = self.parse_request_line(rfile)
         headers = self.parse_headers(rfile)
         return Request(method, target, ver, headers, rfile)
-
     def parse_request_line(self, rfile):
         raw = rfile.readline()
         req_line = str(raw, 'utf-8')
         words = req_line.split()
         if len(words) != 3:
             raise HTTPError(400, 'Bad request', )
-
         method, target, ver = words
         if ver != 'HTTP/1.1':
             raise HTTPError(505, 'HTTP Version Not Supported')
         return method, target, ver
-
     def parse_headers(self, rfile):
         headers = []
         while True:
             line = rfile.readline()
             if line in (b'\r\n', b'\n', b''):
                 break
-
             headers.append(line)
             if len(headers) &gt; MAX_HEADERS:
                 raise HTTPError(494, 'Too many headers')
-
         sheaders = b''.join(headers).decode('utf-8')
         return Parser().parsestr(sheaders)
-
     def parse_values(self, req_values):
         param = req_values.decode('utf-8').split('&amp;')
         subject = param[0][len('subject='):]
         grade = param[1][len('grade='):]
         if not subject or not grade:
             raise HTTPError(400, 'Bad request', 'Params missing')
-
         return subject, grade
-
     def handle_request(self, req):
         if req.target == '/welcome' and req.method == 'GET':
             return self.handle_get_welcome()
-
         if req.method == 'POST':
             return self.handle_post_subjects(req)
-
         if req.target.startswith('/subjects') and req.method == 'GET':
             return self.handle_get_subjects()
-
         raise HTTPError(404, 'Not found')
-
     def send_response(self, conn, resp):
         wfile = conn.makefile('wb')
         status_line = f'HTTP/1.1 {resp.status} {resp.reason}\r\n'
         wfile.write(status_line.encode('utf-8'))
-
         if resp.headers:
             for (key, value) in resp.headers:
                 header_line = f'{key}: {value}\r\n'
                 wfile.write(header_line.encode('utf-8'))
-
         wfile.write(b'\r\n')
-
         if resp.body:
             wfile.write(resp.body)
-
         wfile.flush()
         wfile.close()
-
     def send_error(self, conn, err):
         try:
             status = err.status
@@ -573,29 +523,24 @@ class MyHTTPServer:
             status = 500
             reason = b'Internal Server Error'
             body = b'Internal Server Error'
-
         resp = Response(status, reason, [('Content-Length', len(body))], body)
         self.send_response(conn, resp)
-
     def handle_get_welcome(self):
         content_type = 'text/html; charset=utf-8'
         work_path = os.getcwd()
         res_path = ('\\'.join(work_path.split('\\')[:-1]) + '\\res\\welcome.html').replace('\\', '/')
         with open(res_path) as fin:
             body = fin.read()
-
         body = body.encode('utf-8')
         headers = [('Content-Type', content_type),
                    ('Content-Length', len(body))]
         return Response(200, 'OK', headers, body)
-
     def handle_post_subjects(self, req):
         req_values = req.rfile.readline()
         subject, grade = self.parse_values(req_values)
         subject_id = len(self._subjects) + 1
         self._subjects[subject_id] = {'id': subject_id, 'subject': subject, 'grade': grade}
         return Response(204, 'Created')
-
     def handle_get_subjects(self):
         content_type = 'text/html; charset=utf-8'
         body = '&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'
@@ -605,12 +550,9 @@ class MyHTTPServer:
             body += f'&lt;li&gt;{u[&quot;subject&quot;]}, {u[&quot;grade&quot;]}&lt;/li&gt;'
         body += '&lt;/ul&gt;'
         body += '&lt;/body&gt;&lt;/html&gt;'
-
         body = body.encode('utf-8')
         headers = [('Content-Type', content_type), ('Content-Length', len(body))]
         return Response(200, 'OK', headers, body)
-
-
 if __name__ == '__main__':
     s_host = ''
     s_port = 8080
@@ -650,7 +592,6 @@ if __name__ == '__main__':
         self.version = version
         self.headers = headers
         self.rfile = rfile
-
     def body(self):
         size = self.headers.get('Content-Length')
         if not size:

@@ -51,6 +51,10 @@
 <li>
     <a href="../../Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
 </li>
+                                    
+<li>
+    <a href="../../Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown active">
@@ -71,7 +75,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../../Lr3/lr3-tasks/" class="nav-link">
+                                <a rel="prev" href="../../Lr4/lr4-tasks/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -135,25 +139,21 @@
 </ul>
 <p>Script for adding data:</p>
 <pre><code class="language-python">from cars_first_app.models import *
-
 drivers = []
 for i in range(1, 7):
     new_driver = Driver(username=f&quot;driver{i}&quot;, first_name=f&quot;TestFN{i}&quot;, last_name=f&quot;TestSN{i}&quot;, birthday=f&quot;2000-07-0{i}&quot;, passport=f&quot;111111111{i}&quot;, password=&quot;123&quot;)
     drivers.append(new_driver)
     new_driver.save()
-
 i = 1
 for driver in drivers:
     new_license = DriverLicense(id_driver=driver, license_number=f&quot;111111111{i}&quot;, type='B', issue_date=f&quot;2022-12-0{i}&quot;)
     new_license.save()
     i += 1
-
 cars = []
 for i in range(1, 7):
     new_car = Car(license_plate=f&quot;a00{i}aa&quot;, car_brand='Prototype', model=f&quot;v{i}&quot;)
     cars.append(new_car)
     new_car.save()
-
 for i in range(len(drivers)):
     new_ownership = Ownership(id_driver=drivers[i], id_car=cars[i], start_date=f&quot;2020-01-0{i+1}&quot;, end_date=f&quot;2022-12-0{i+1}&quot;)
     new_ownership.save()
@@ -168,7 +168,6 @@ for i in range(len(drivers)):
     license_number = models.CharField(max_length=10)
     type = models.CharField(max_length=10)
     issue_date = models.DateField()
-
 
 class Ownership(models.Model):
     id_driver = models.ForeignKey(Driver, on_delete=models.CASCADE, related_name=&quot;driver_ownership&quot;)
@@ -227,16 +226,12 @@ for driver in counter_car:
         drivers = Driver.objects.all()
         serializer = DriverSerializer(drivers, many=True)
         return Response({&quot;Drivers&quot;: serializer.data})
-
-
 class CreateDriverAPIView(APIView):
     def post(self, request):
         driver = request.data.get(&quot;driver&quot;)
         serializer = CreateDriverSerializer(data=driver)
-
         if serializer.is_valid(raise_exception=True):
             driver_saved = serializer.save()
-
         return Response({&quot;Success&quot;: &quot;Driver '{}' created succesfully.&quot;.format(driver_saved.username)})
 </code></pre>
 <ul>
@@ -247,12 +242,9 @@ class CreateDriverAPIView(APIView):
     class Meta:
         model = Driver
         fields = &quot;__all__&quot;
-
-
 class CreateDriverSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Driver.objects.create(**validated_data)
-
     class Meta:
         model = Driver
         fields = &quot;__all__&quot;
@@ -273,11 +265,8 @@ class CreateDriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = DriverLicense
         fields = (&quot;pk&quot;, &quot;license_number&quot;, &quot;type&quot;, &quot;issue_date&quot;)
-
-
 class DriverAndLicenseSerializer(serializers.ModelSerializer):
     driver_license = DriverLicenseSerializer(many=True)
-
     class Meta:
         model = Driver
         fields = (&quot;pk&quot;, &quot;username&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;birthday&quot;,
@@ -298,12 +287,9 @@ class DriverAndLicenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ownership
         fields = &quot;__all__&quot;
-
-
 class RetrieveDriverSerializer(serializers.ModelSerializer):
     driver_ownership = DriverOwnershipSerializer(many=True, read_only=True)
     driver_license = DriverLicenseSerializer(many=True, read_only=True)
-
     class Meta:
         model = Driver
         fields = (&quot;pk&quot;, &quot;username&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;birthday&quot;,
@@ -349,8 +335,6 @@ class RetrieveDriverSerializer(serializers.ModelSerializer):
 <pre><code class="language-python">from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
-
 schema_view = get_schema_view(
    openapi.Info(
       title=&quot;API&quot;,
@@ -363,7 +347,6 @@ schema_view = get_schema_view(
    public=True,
    permission_classes=(permissions.AllowAny,),
 )
-
 urlpatterns = [
     ...,
     path('doc/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

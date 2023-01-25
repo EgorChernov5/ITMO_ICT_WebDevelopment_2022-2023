@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Egor Chernov">
+        <link rel="canonical" href="https://egorchernov5.github.io/Lr4/lr4-tasks/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Lab 4 - Project documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Project documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Labs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Lr1/lr1-tasks/" class="dropdown-item">Lab 1</a>
+</li>
+                                    
+<li>
+    <a href="../../Lr2/lr2-tasks/" class="dropdown-item">Lab 2</a>
+</li>
+                                    
+<li>
+    <a href="../../Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Lab 4</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">PW <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../PW3/pw3-tasks/" class="dropdown-item">PW 3</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../Lr3/lr3-tasks/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../PW3/pw3-tasks/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">Структура документации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">Проект</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#router-stores-api" class="nav-link">router, stores, api</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#layout-views-components" class="nav-link">layout, views, components</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="_1">Структура документации</h2>
+<ul>
+<li><strong>Проект</strong> - суть проекта</li>
+<li><strong>router, stores, api</strong> - описание роутера, стора и апи</li>
+<li><strong>layout, views, components</strong> - описание лэйаута, вьюхи и компонента</li>
+</ul>
+<h2 id="_2">Проект</h2>
+<p>По требованиям лабораторной работы требуется написать web-приложение на Vue. Я реализовал web-приложение для сети отелей основной функционал которого включает: регистрация пользователей, предоставление информации об отелей, типов номеров и самих номерах, возможность бронирования номеров и оставление комментариев для номеров.</p>
+<h2 id="router-stores-api">router, stores, api</h2>
+<p>В папке router лежит файл index.js в котором прописаны пути привязаны соответствующие представления для этих путей.</p>
+<ul>
+<li><code>index.js</code></li>
+</ul>
+<pre><code>import {createRouter, createWebHistory} from 'vue-router'
+import HotelView from '../views/HotelPage.vue'
+import RoomTypeView from '../views/RoomTypePage.vue'
+…
+
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        {
+            path: '/',
+            name: 'hotels',
+            component: HotelView
+        },
+        {
+            path: '/hotel/:id/',
+            name: 'room_types',
+            props: true,
+            component: RoomTypeView
+        },
+        …
+    ]
+})
+
+export default router
+</code></pre>
+<p>В папке stores лежат файлы (index.js, hotels.js, regCom.js, user.js), которые предоставляют функционал работы с состояниями и действиями. Разбиты файлы таким образом, что hotels.js предоставляет возможность работы с моделями базы данных Hotel, RoomType, Room нашего сервера, соответственно, regCom.js для Registration, Comment, user.js для User, Guest, Employee.
+* <code>user.js</code></p>
+<pre><code>import {defineStore} from 'pinia'
+import {userApi} from &quot;@/api&quot;;
+
+const useUserStore = defineStore('user', {
+    state: () =&gt; ({
+        users: [],
+        tokens: [],
+        accUser: []
+    }),
+    actions: {
+        async loadUsers(token) {
+            const response = await userApi.getUsers(token)
+
+            this.users = response.data
+            return response
+        },
+        …
+    }
+})
+
+export default useUserStore
+</code></pre>
+<p>В папке api лежат файлы (index.js, instance.js, hotels.js, regCom.js, user.js), которые в свою очередь предоставляют функционал работы с API сервера. Подключение по API реализовано с помощью библиотеки Axios. В файле instance.js, помимо инициализации axios, мы добавляем interceptors для отслеживания ошибок. В нашем случае для обновления access token.
+* <code>instance.js</code></p>
+<pre><code>import axios from &quot;axios&quot;;
+
+const apiURL = 'http://127.0.0.1:8000'
+
+const instance = axios.create({
+    baseURL: apiURL
+})
+
+…
+
+instance.interceptors.response.use(function (response) {
+    return response;
+}, async function (error) {
+    if (error.response.status === 401) {
+        const originalRequest = error.config
+        const refreshToken = localStorage.getItem('refreshToken')
+        const response = async (refreshToken) =&gt; {
+            return await instance({
+                method: 'POST',
+                url: `/auth/token/refresh/`,
+                data: {
+                    refresh: refreshToken
+                }
+            })
+        }
+
+        const accessToken = await response(refreshToken)
+        localStorage.setItem('accessToken', accessToken.data.access)
+
+        originalRequest.headers['Authorization'] = 'Bearer ' + accessToken.data.access
+
+        return instance(originalRequest)
+    }
+    return Promise.reject(error);
+})
+
+export default instance
+</code></pre>
+<ul>
+<li><code>user.js</code></li>
+</ul>
+<pre><code>class UserApi {
+    constructor(instance) {
+        this.API = instance
+    }
+
+    login = async (username, password) =&gt; {
+        return this.API({
+            method: 'POST',
+            url: `/auth/token/`,
+            data: {
+                username: username,
+                password: password
+            }
+        })
+    }
+
+    …
+
+    putAccUser = async (token, id, username, firstName, lastName, email, phoneGuest, passportGuest, phoneEmployee, positionEmployee) =&gt; {
+        return this.API({
+            method: 'PUT',
+            url: `/account/user/${id}/`,
+            headers: {'Authorization': 'Bearer ' + token},
+            data: {
+                username: username,
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                user_guest: {
+                    phone_guest: phoneGuest,
+                    passport_guest: passportGuest
+                },
+                user_employee: {
+                    phone_employee: phoneEmployee,
+                    position_employee: positionEmployee
+                }
+            }
+        })
+    }
+
+    deleteUser = async (token, id, currentPassword) =&gt; {
+        return this.API({
+            method: 'DELETE',
+            url: `/auth/users/${id}/`,
+            headers: {'Authorization': 'Bearer ' + token},
+            data: {
+                current_password: currentPassword
+            }
+        })
+    }
+
+    createUser = async (username, email, password) =&gt; {
+        return this.API({
+            method: 'POST',
+            url: '/auth/users/',
+            data: {
+                username: username,
+                email: email,
+                password: password
+            }
+        })
+    }
+}
+
+export default UserApi
+</code></pre>
+<h2 id="layout-views-components">layout, views, components</h2>
+<p>В layout мы определяем базовый шаблон и прописываем tag <slot/> для того, чтобы на это место подставлять наши views.
+* <code>BaseLayout.vue</code></p>
+<pre><code>&lt;template&gt;
+    &lt;main class=&quot;background&quot;&gt;
+      &lt;div class=&quot;blur&quot;&gt;
+        &lt;slot /&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;BaseLayout&quot;
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+…
+&lt;/style&gt;
+</code></pre>
+<p>Во views мы реализовывали интерфейсы web-приложения. В ходе работы логика реализации функционала каждого представления повторялась. Разберем основные моменты.</p>
+<h3 id="_3">Передача данных от родительское объекта дочернему:</h3>
+<p>Для того, чтобы передать данные дочернему компоненту мы определяем дочерний компонент (HotelItem.vue) и с помощью директивы v-bind прописываем имена props на стороне дочернего элемента.
+* <code>HotelPage.vue</code></p>
+<pre><code>&lt;template&gt;
+  &lt;base-layout&gt;
+    &lt;nav-bar /&gt;
+    &lt;div id=&quot;hotelPage&quot;&gt;
+      &lt;div class=&quot;container col-8 py-4&quot;&gt;
+        &lt;h1 class=&quot;text-center&quot;&gt;Our hotels&lt;/h1&gt;
+        &lt;ul class=&quot;navbar-nav p-3&quot;&gt;
+          &lt;li class=&quot;nav-item&quot; v-for=&quot;hotel in hotels&quot; :key=&quot;hotel.id&quot;&gt;
+            &lt;hotel-item class=&quot;mx-0 px-0&quot; :name_hotel=&quot;hotel.name_hotel&quot; :address_hotel=&quot;hotel.address_hotel&quot; :des_hotel=&quot;hotel.des_hotel&quot; /&gt;
+            &lt;p class=&quot;d-flex justify-content-center&quot; id=&quot;lookButton&quot;&gt;
+              &lt;RouterLink class=&quot;nav-link btn-text w-100 text-center fs-5&quot; :to=&quot;{name: 'room_types', params: {id: hotel.id}}&quot;&gt;Look&lt;/RouterLink&gt;
+            &lt;/p&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/base-layout&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import …
+
+export default {
+  name: &quot;HotelPage&quot;,
+  components: { BaseLayout, HotelItem, NavBar },
+  computed: {
+    ...mapState(useHotelsStore, ['hotels'])
+  },
+  methods: {
+    ...mapActions(useHotelsStore, ['loadHotels'])
+  },
+  mounted() {
+    this.loadHotels()
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+…
+&lt;/style&gt;
+</code></pre>
+<p>Дочерний компонент на своей стороне принимает props, записывает их и отображает.
+* <code>HotelItem.vue</code></p>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;row&quot; id=&quot;hotelItem&quot;&gt;
+    &lt;div class=&quot;col-6&quot;&gt;
+      &lt;p class=&quot;fs-2&quot;&gt;{{ name_hotel }}&lt;/p&gt;
+      &lt;p class=&quot;fs-4&quot;&gt;Address: &lt;span class=&quot;fs-5&quot;&gt;{{ address_hotel }}&lt;/span&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-6&quot;&gt;
+      &lt;p class=&quot;fs-2&quot;&gt;Description:&lt;/p&gt;
+      &lt;p v-if=&quot;des_hotel&quot; class=&quot;fs-5&quot;&gt;{{ des_hotel }}&lt;/p&gt;
+      &lt;p v-else class=&quot;fs-5&quot;&gt;We don't have any descriptions...&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;HotelItem&quot;,
+  props: {
+    name_hotel: {
+      type: String,
+      required: true
+    },
+    address_hotel: {
+      type: String,
+      required: true
+    },
+    des_hotel: {
+      type: String,
+      required: false
+    }
+  }
+}
+&lt;/script&gt;
+&lt;style scoped&gt;
+…
+&lt;/style&gt;
+</code></pre>
+<h3 id="_4">Передача данных от дочернего объекта родительскому:</h3>
+<p>Для того, чтобы передать данные от дочернего объекта в родительский мы в дочернем элементе прописываем метод, который будет отправлять данные наверх, а родительский объект будет прослушивать изменения от дочернего.</p>
+<p>Алгоритм реализации следующий:
+* Реализуем метод, который отправляет данные наверх, используя конструкцию this.$emit;
+* В родительском объекте с помощью директивы v-on установить прослушивание;
+* Реализовать метод, который будет обрабатывать пришедшие данные.
+* <code>UpdateRegForm.vue</code></p>
+<pre><code>&lt;template&gt;
+  …
+&lt;/template&gt;
+
+&lt;script&gt;
+import …
+
+export default {
+  name: &quot;UpdateRegForm&quot;,
+  data() {
+    return {
+      isValid: true,
+      idReg: &quot;&quot;,
+      idHotel: &quot;&quot;,
+      nameHotel: &quot;&quot;,
+      idRoomType: &quot;&quot;,
+      roomType: &quot;&quot;,
+      idRoom: &quot;&quot;,
+      numberRoom: &quot;&quot;,
+      idEmployee: &quot;&quot;,
+      statusReg: &quot;&quot;,
+      statusPay: &quot;&quot;,
+      checkIn: &quot;&quot;,
+      checkOut: &quot;&quot;,
+      isStaff: localStorage.getItem('isStaff') === &quot;true&quot;
+    }
+  },
+  computed: {
+    ...mapState(useRegComStore, ['regs']),
+    ...mapState(useHotelsStore, ['hotels', 'rooms'])
+  },
+  methods: {
+    ...mapActions(useRegComStore, ['loadRegs', 'delReg']),
+    ...mapActions(useHotelsStore, ['loadHotels', 'loadRooms']),
+    async saveBook() {
+      await this.loadHotels()
+      for (let hotel of this.hotels) {
+        if (this.nameHotel === hotel.name_hotel) {
+          this.idHotel = hotel.id
+          for (let roomType of hotel.hotel_room_type) {
+            if (this.roomType === roomType.type_rt) {
+              this.idRoomType = roomType.id
+              break
+            }
+            this.idRoomType = 0
+          }
+          break
+        }
+        this.idHotel = 0
+      }
+      await this.loadRooms(this.idRoomType)
+      for (let room of this.rooms.rt_room) {
+        if (this.numberRoom.toString() === room.number_room.toString()) {
+          this.idRoom = room.id
+          break
+        }
+        this.idRoom = 0
+      }
+      if (this.idHotel === 0 || this.idRoomType === 0 || this.idRoom === 0) {
+        this.isValid = false
+        return
+      }
+      this.isValid = true
+      const stReg = (this.statusReg === &quot;Booked&quot;) ? &quot;B&quot; : &quot;T&quot;
+      const stPay = (this.statusPay === &quot;Not paid for&quot;) ? &quot;NP&quot; : &quot;YP&quot;
+      this.$emit('saveBook', {
+        id_hotel: this.idHotel,
+        name_hotel: this.nameHotel,
+        id_rt: this.idRoomType,
+        rt: this.roomType,
+        id_room: this.idRoom,
+        number_room: this.numberRoom,
+        id_employee: this.idEmployee,
+        status_reg: stReg,
+        status_pay: stPay,
+        check_in: this.checkIn,
+        check_out: this.checkOut
+      })
+    },
+    …
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+…
+&lt;/style&gt;
+</code></pre>
+<ul>
+<li><code>UpdateRegPage.vue</code></li>
+</ul>
+<pre><code>&lt;template&gt;
+  &lt;base-layout&gt;
+    &lt;nav-bar /&gt;
+    &lt;div class=&quot;container col-5 py-4&quot; id=&quot;updateRegPage&quot;&gt;
+      &lt;h1 class=&quot;text-center&quot;&gt;Change registration&lt;/h1&gt;
+      &lt;update-reg-form @saveBook='onSaveBook' /&gt;
+    &lt;/div&gt;
+  &lt;/base-layout&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import …
+
+export default {
+  name: &quot;UpdateRegPage&quot;,
+  components: { NavBar, UpdateRegForm, BaseLayout },
+  computed: {
+    ...mapState(useRegComStore, ['regs'])
+  },
+  methods: {
+    ...mapActions(useRegComStore, ['updateReg']),
+    async onSaveBook(data) {
+      const accessToken = localStorage.getItem('accessToken')
+      const idReg = this.$route.params['id']
+      const idUser = localStorage.getItem('idUser')
+      const booking = new Date().toJSON().slice(0, 10)
+      await this.updateReg(accessToken, idReg, idUser, data.id_hotel, data.id_rt, data.id_room, data.id_employee, data.status_reg, data.status_pay, data.check_in, data.check_out, booking)
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+…
+&lt;/style&gt;
+</code></pre>
+<p>В данном примере, мы заполняем данные в форме нажимаем на кнопку Save, данные из компонента отправляются наверх и в представлении отправляются на сервер.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
