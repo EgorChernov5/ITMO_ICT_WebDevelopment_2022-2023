@@ -4,26 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
+        
         <meta name="author" content="Egor Chernov">
-        <link rel="canonical" href="https://egorchernov5.github.io/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Project documentation</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        <link rel="canonical" href="https://egorchernov5.github.io/Lr3/leetcode/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>LeetCode - Project documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Project documentation</a>
+                <a class="navbar-brand" href="../..">Project documentation</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -33,19 +33,19 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Labs <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="Lr1/lr1-tasks/" class="dropdown-item">Lab 1</a>
+    <a href="../../Lr1/lr1-tasks/" class="dropdown-item">Lab 1</a>
 </li>
                                     
 <li>
-    <a href="Lr2/lr2-tasks/" class="dropdown-item">Lab 2</a>
+    <a href="../../Lr2/lr2-tasks/" class="dropdown-item">Lab 2</a>
 </li>
                                     
   <li class="dropdown-submenu">
@@ -53,11 +53,11 @@
     <ul class="dropdown-menu">
             
 <li>
-    <a href="Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
+    <a href="../lr3-tasks/" class="dropdown-item">Lab 3</a>
 </li>
             
 <li>
-    <a href="Lr3/leetcode/" class="dropdown-item">LeetCode</a>
+    <a href="./" class="dropdown-item active">LeetCode</a>
 </li>
     </ul>
   </li>
@@ -67,11 +67,11 @@
     <ul class="dropdown-menu">
             
 <li>
-    <a href="Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
+    <a href="../../Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
 </li>
             
 <li>
-    <a href="Lr4/leetcode/" class="dropdown-item">LeetCode</a>
+    <a href="../../Lr4/leetcode/" class="dropdown-item">LeetCode</a>
 </li>
     </ul>
   </li>
@@ -82,7 +82,7 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="PW3/pw3-tasks/" class="dropdown-item">PW 3</a>
+    <a href="../../PW3/pw3-tasks/" class="dropdown-item">PW 3</a>
 </li>
                                 </ul>
                             </li>
@@ -95,12 +95,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href="../lr3-tasks/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="Lr1/lr1-tasks/" class="nav-link">
+                                <a rel="next" href="../../Lr4/lr4-tasks/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -122,7 +122,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#welcome-to-my-doc" class="nav-link">Welcome to my doc!</a>
+            <li class="nav-item" data-level="2"><a href="#leetcode-for-lr3" class="nav-link">LeetCode for Lr3</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-1-partitioning-into-minimum-number-of-deci-binary-numbers" class="nav-link">Task 1: Partitioning Into Minimum Number Of Deci-Binary Numbers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-2-subrectangle-queries" class="nav-link">Task 2: Subrectangle Queries</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -131,25 +141,126 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-my-doc">Welcome to my doc!</h1>
-<h4 id="some-information">Some information:</h4>
-<p>Name: Chernov Egor Konstantinovich</p>
-<p>University: ITMO, 09.03.03</p>
-<p>Group: k33401</p>
-<p>Contacts: <a href="vk.com/4ernovec">vk.com</a>, <a href="t.me/chernovec">telgram</a></p>
-<h4 id="completed-labs">Completed labs:</h4>
+<h2 id="leetcode-for-lr3">LeetCode for Lr3</h2>
+<h2 id="task-1-partitioning-into-minimum-number-of-deci-binary-numbers">Task 1: Partitioning Into Minimum Number Of Deci-Binary Numbers</h2>
+<h3 id="description">Description</h3>
+<p>A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros. For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.</p>
+<p>Given a string n that represents a positive decimal integer, return the minimum number of positive deci-binary numbers needed so that they sum up to n.</p>
 <ul>
-<li><code>Lab 1</code> - Work with sockets.</li>
-<li><code>Lab 2</code> - Create a site on Djando.</li>
-<li><code>Lab 3</code> - Work with Django REST Framework. Server side, API.</li>
-<li><code>Lab 4</code> - Work with Vue.JS. Client side.</li>
+<li><code>Example 1</code></li>
 </ul>
-<h4 id="practical-works">Practical works:</h4>
+<pre><code>Input: n = &quot;32&quot;
+Output: 3
+Explanation: 10 + 11 + 11 = 32
+</code></pre>
 <ul>
-<li><code>PW 3.1</code> - Django Web framework</li>
-<li><code>PW 3.2</code> - Django rest framework</li>
-<li><code>PW 3.3</code> - Documentation</li>
-</ul></div>
+<li><code>Example 2</code></li>
+</ul>
+<pre><code>Input: n = &quot;82734&quot;
+Output: 8
+</code></pre>
+<ul>
+<li><code>Example 3</code></li>
+</ul>
+<pre><code>Input: n = &quot;27346209830709182346&quot;
+Output: 9
+</code></pre>
+<h3 id="solution">Solution</h3>
+<pre><code>class Solution {
+    public int minPartitions(String n) {
+        int max = Integer.MIN_VALUE;
+        for(int k : n.toCharArray()) max = Math.max(max,k-'0');
+        return max ; 
+    }
+}
+</code></pre>
+<h2 id="task-2-subrectangle-queries">Task 2: Subrectangle Queries</h2>
+<h3 id="description_1">Description</h3>
+<p>Implement the class SubrectangleQueries which receives a rows x cols rectangle as a matrix of integers in the constructor and supports two methods:</p>
+<ol>
+<li>
+<p>updateSubrectangle(int row1, int col1, int row2, int col2, int newValue)</p>
+</li>
+<li>
+<p>Updates all values with newValue in the subrectangle whose upper left coordinate is (row1,col1) and bottom right coordinate is (row2,col2).</p>
+</li>
+<li>
+<p>getValue(int row, int col)</p>
+</li>
+<li>
+<p>Returns the current value of the coordinate (row,col) from the rectangle.</p>
+</li>
+<li>
+<p><code>Example 1</code></p>
+</li>
+</ol>
+<pre><code>Input
+[&quot;SubrectangleQueries&quot;,&quot;getValue&quot;,&quot;updateSubrectangle&quot;,&quot;getValue&quot;,&quot;getValue&quot;,&quot;updateSubrectangle&quot;,&quot;getValue&quot;,&quot;getValue&quot;]
+[[[[1,2,1],[4,3,4],[3,2,1],[1,1,1]]],[0,2],[0,0,3,2,5],[0,2],[3,1],[3,0,3,2,10],[3,1],[0,2]]
+Output
+[null,1,null,5,5,null,10,5]
+Explanation
+SubrectangleQueries subrectangleQueries = new SubrectangleQueries([[1,2,1],[4,3,4],[3,2,1],[1,1,1]]);  
+// The initial rectangle (4x3) looks like:
+// 1 2 1
+// 4 3 4
+// 3 2 1
+// 1 1 1
+subrectangleQueries.getValue(0, 2); // return 1
+subrectangleQueries.updateSubrectangle(0, 0, 3, 2, 5);
+// After this update the rectangle looks like:
+// 5 5 5
+// 5 5 5
+// 5 5 5
+// 5 5 5 
+subrectangleQueries.getValue(0, 2); // return 5
+subrectangleQueries.getValue(3, 1); // return 5
+subrectangleQueries.updateSubrectangle(3, 0, 3, 2, 10);
+// After this update the rectangle looks like:
+// 5   5   5
+// 5   5   5
+// 5   5   5
+// 10  10  10 
+subrectangleQueries.getValue(3, 1); // return 10
+subrectangleQueries.getValue(0, 2); // return 5
+</code></pre>
+<ul>
+<li><code>Example 2</code></li>
+</ul>
+<pre><code>Input
+[&quot;SubrectangleQueries&quot;,&quot;getValue&quot;,&quot;updateSubrectangle&quot;,&quot;getValue&quot;,&quot;getValue&quot;,&quot;updateSubrectangle&quot;,&quot;getValue&quot;]
+[[[[1,1,1],[2,2,2],[3,3,3]]],[0,0],[0,0,2,2,100],[0,0],[2,2],[1,1,2,2,20],[2,2]]
+Output
+[null,1,null,100,100,null,20]
+Explanation
+SubrectangleQueries subrectangleQueries = new SubrectangleQueries([[1,1,1],[2,2,2],[3,3,3]]);
+subrectangleQueries.getValue(0, 0); // return 1
+subrectangleQueries.updateSubrectangle(0, 0, 2, 2, 100);
+subrectangleQueries.getValue(0, 0); // return 100
+subrectangleQueries.getValue(2, 2); // return 100
+subrectangleQueries.updateSubrectangle(1, 1, 2, 2, 20);
+subrectangleQueries.getValue(2, 2); // return 20
+</code></pre>
+<h3 id="solution_1">Solution</h3>
+<pre><code>class SubrectangleQueries {
+    int [][] rectangle;
+    public SubrectangleQueries(int[][] rectangle) {
+        this.rectangle=rectangle;
+    }
+
+    public void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
+        for(int i=row1;i&lt;=row2;i++){
+            for(int j=col1;j&lt;=col2;j++){
+                this.rectangle[i][j]=newValue;
+            }
+        }
+    }
+
+    public int getValue(int row, int col) {
+         return this.rectangle[row][col] ;    
+    }
+}
+</code></pre></div>
             </div>
         </div>
 
@@ -158,11 +269,11 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -227,8 +338,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.3.1
-Build Date UTC : 2023-01-26 11:12:27.310871+00:00
--->

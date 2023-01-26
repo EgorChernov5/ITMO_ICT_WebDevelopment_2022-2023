@@ -4,26 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
+        
         <meta name="author" content="Egor Chernov">
-        <link rel="canonical" href="https://egorchernov5.github.io/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Project documentation</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        <link rel="canonical" href="https://egorchernov5.github.io/Lr4/leetcode/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>LeetCode - Project documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Project documentation</a>
+                <a class="navbar-brand" href="../..">Project documentation</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -33,19 +33,19 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Labs <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="Lr1/lr1-tasks/" class="dropdown-item">Lab 1</a>
+    <a href="../../Lr1/lr1-tasks/" class="dropdown-item">Lab 1</a>
 </li>
                                     
 <li>
-    <a href="Lr2/lr2-tasks/" class="dropdown-item">Lab 2</a>
+    <a href="../../Lr2/lr2-tasks/" class="dropdown-item">Lab 2</a>
 </li>
                                     
   <li class="dropdown-submenu">
@@ -53,11 +53,11 @@
     <ul class="dropdown-menu">
             
 <li>
-    <a href="Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
+    <a href="../../Lr3/lr3-tasks/" class="dropdown-item">Lab 3</a>
 </li>
             
 <li>
-    <a href="Lr3/leetcode/" class="dropdown-item">LeetCode</a>
+    <a href="../../Lr3/leetcode/" class="dropdown-item">LeetCode</a>
 </li>
     </ul>
   </li>
@@ -67,11 +67,11 @@
     <ul class="dropdown-menu">
             
 <li>
-    <a href="Lr4/lr4-tasks/" class="dropdown-item">Lab 4</a>
+    <a href="../lr4-tasks/" class="dropdown-item">Lab 4</a>
 </li>
             
 <li>
-    <a href="Lr4/leetcode/" class="dropdown-item">LeetCode</a>
+    <a href="./" class="dropdown-item active">LeetCode</a>
 </li>
     </ul>
   </li>
@@ -82,7 +82,7 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="PW3/pw3-tasks/" class="dropdown-item">PW 3</a>
+    <a href="../../PW3/pw3-tasks/" class="dropdown-item">PW 3</a>
 </li>
                                 </ul>
                             </li>
@@ -95,12 +95,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href="../lr4-tasks/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="Lr1/lr1-tasks/" class="nav-link">
+                                <a rel="next" href="../../PW3/pw3-tasks/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -122,7 +122,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#welcome-to-my-doc" class="nav-link">Welcome to my doc!</a>
+            <li class="nav-item" data-level="2"><a href="#leetcode-for-lr4" class="nav-link">LeetCode for Lr4</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-1-strictly-palindromic-number" class="nav-link">Task 1: Strictly Palindromic Number</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#task-2-minimum-number-of-operations-to-move-all-balls-to-each-box" class="nav-link">Task 2: Minimum Number of Operations to Move All Balls to Each Box</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -131,25 +141,91 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-my-doc">Welcome to my doc!</h1>
-<h4 id="some-information">Some information:</h4>
-<p>Name: Chernov Egor Konstantinovich</p>
-<p>University: ITMO, 09.03.03</p>
-<p>Group: k33401</p>
-<p>Contacts: <a href="vk.com/4ernovec">vk.com</a>, <a href="t.me/chernovec">telgram</a></p>
-<h4 id="completed-labs">Completed labs:</h4>
+<h2 id="leetcode-for-lr4">LeetCode for Lr4</h2>
+<h2 id="task-1-strictly-palindromic-number">Task 1: Strictly Palindromic Number</h2>
+<h3 id="description">Description</h3>
+<p>An integer n is strictly palindromic if, for every base b between 2 and n - 2 (inclusive), the string representation of the integer n in base b is palindromic.</p>
+<p>Given an integer n, return true if n is strictly palindromic and false otherwise.</p>
+<p>A string is palindromic if it reads the same forward and backward.</p>
 <ul>
-<li><code>Lab 1</code> - Work with sockets.</li>
-<li><code>Lab 2</code> - Create a site on Djando.</li>
-<li><code>Lab 3</code> - Work with Django REST Framework. Server side, API.</li>
-<li><code>Lab 4</code> - Work with Vue.JS. Client side.</li>
+<li><code>Example 1</code></li>
 </ul>
-<h4 id="practical-works">Practical works:</h4>
+<pre><code>Input: n = 9
+Output: false
+Explanation: In base 2: 9 = 1001 (base 2), which is palindromic.
+In base 3: 9 = 100 (base 3), which is not palindromic.
+Therefore, 9 is not strictly palindromic so we return false.
+Note that in bases 4, 5, 6, and 7, n = 9 is also not palindromic.
+</code></pre>
 <ul>
-<li><code>PW 3.1</code> - Django Web framework</li>
-<li><code>PW 3.2</code> - Django rest framework</li>
-<li><code>PW 3.3</code> - Documentation</li>
-</ul></div>
+<li><code>Example 2</code></li>
+</ul>
+<pre><code>Input: n = 4
+Output: false
+Explanation: We only consider base 2: 4 = 100 (base 2), which is not palindromic.
+Therefore, we return false.
+</code></pre>
+<h3 id="solution">Solution</h3>
+<pre><code>class Solution {
+    public boolean isStrictlyPalindromic(int n) {
+
+       for (int j = 2; j &lt;= n - 2; j++) {
+           String strX = Integer.toString(n, j);
+
+           int i = 0, length = strX.length() - 1;
+           while (i &lt;= length / 2) {
+               if (strX.charAt(i) != strX.charAt(length)) {
+                   return false;
+               }
+               i++;
+               length--;
+           }
+       }
+        return true;
+    }
+}
+</code></pre>
+<h2 id="task-2-minimum-number-of-operations-to-move-all-balls-to-each-box">Task 2: Minimum Number of Operations to Move All Balls to Each Box</h2>
+<h3 id="description_1">Description</h3>
+<p>You have n boxes. You are given a binary string boxes of length n, where boxes[i] is '0' if the ith box is empty, and '1' if it contains one ball.</p>
+<p>In one operation, you can move one ball from a box to an adjacent box. Box i is adjacent to box j if abs(i - j) == 1. Note that after doing so, there may be more than one ball in some boxes.</p>
+<p>Return an array answer of size n, where answer[i] is the minimum number of operations needed to move all the balls to the ith box.</p>
+<p>Each answer[i] is calculated considering the initial state of the boxes.</p>
+<ul>
+<li><code>Example 1</code></li>
+</ul>
+<pre><code>Input: boxes = &quot;110&quot;
+Output: [1,1,3]
+Explanation: The answer for each box is as follows:
+1) First box: you will have to move one ball from the second box to the first box in one operation.
+2) Second box: you will have to move one ball from the first box to the second box in one operation.
+3) Third box: you will have to move one ball from the first box to the third box in two operations, and move one ball from the second box to the third box in one operation.
+</code></pre>
+<ul>
+<li><code>Example 2</code></li>
+</ul>
+<pre><code>Input: boxes = &quot;001011&quot;
+Output: [11,8,5,4,3,4]
+</code></pre>
+<h3 id="solution_1">Solution</h3>
+<pre><code>class Solution {
+    public int[] minOperations(String boxes) {
+        int[] res = new int[boxes.length()];
+        for (int k = 0; k &lt; boxes.length(); k++) {
+            int i = 0, j = boxes.length()-1;
+            int c = 0;
+            while(i &lt; k || j &gt; k){
+                if(i &lt; k &amp;&amp; boxes.charAt(i) == '1') c += k-i;
+                if(j &gt; k &amp;&amp; boxes.charAt(j) == '1') c += j-k;
+                i++;
+                j--;
+            }
+            res[k] = c;
+        }
+        return res;
+    }
+}
+</code></pre></div>
             </div>
         </div>
 
@@ -158,11 +234,11 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -227,8 +303,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.3.1
-Build Date UTC : 2023-01-26 11:12:27.310871+00:00
--->
